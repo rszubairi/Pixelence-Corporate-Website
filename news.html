@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News & Updates | Pixelence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ── Hero ── */
+        .news-hero {
+            padding: 150px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-darker), var(--bg-dark));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -15%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(75, 33, 204, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+        }
+
+        .news-hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .news-hero > .container > p {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* ── Timeline layout ── */
+        .news-section {
+            padding: 80px 0 100px;
+            background: var(--bg-dark);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding-left: 60px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 24px;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg,
+                var(--secondary-color),
+                var(--accent-color),
+                var(--secondary-color),
+                rgba(157,141,241,0.2));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Dot on timeline */
+        .timeline-dot {
+            position: absolute;
+            left: -44px;
+            top: 28px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            border: 3px solid var(--bg-dark);
+            box-shadow: 0 0 12px rgba(157,141,241,0.4);
+            z-index: 1;
+        }
+
+        .timeline-item.featured .timeline-dot {
+            background: var(--accent-color);
+            box-shadow: 0 0 16px rgba(255,94,133,0.5);
+            width: 18px;
+            height: 18px;
+            left: -46px;
+            top: 26px;
+        }
+
+        /* Card */
+        .news-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(157, 141, 241, 0.12);
+            border-radius: 14px;
+            padding: 35px;
+            transition: var(--transition);
+        }
+
+        .news-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--secondary-color);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .timeline-item.featured .news-card {
+            border-color: rgba(255,94,133,0.25);
+            background: linear-gradient(135deg, rgba(255,94,133,0.04), rgba(75,33,204,0.04));
+        }
+
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .news-date {
+            color: var(--accent-color);
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .news-tag {
+            display: inline-block;
+            padding: 3px 12px;
+            background: rgba(157,141,241,0.12);
+            border: 1px solid rgba(157,141,241,0.25);
+            border-radius: 20px;
+            color: var(--secondary-color);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .news-card h3 {
+            font-size: 1.45rem;
+            margin-bottom: 14px;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        .news-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .news-card p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            margin-top: 18px;
+        }
+
+        .read-more:hover {
+            color: var(--primary-light);
+            gap: 12px;
+        }
+
+        /* ── Year marker ── */
+        .year-marker {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 0;
+        }
+
+        .year-marker h2 {
+            font-size: 1.6rem;
+            color: var(--text-light);
+            position: relative;
+        }
+
+        .year-marker .timeline-dot {
+            width: 10px;
+            height: 10px;
+            left: -42px;
+            top: 8px;
+            background: rgba(157,141,241,0.4);
+            box-shadow: none;
+        }
+
+        /* ── CTA ── */
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+        }
+
+        .cta-section h2 { font-size: 2.4rem; margin-bottom: 18px; }
+        .cta-section p  { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 35px; }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .news-hero h1 { font-size: 2.4rem; }
+            .timeline { padding-left: 40px; }
+            .timeline::before { left: 14px; }
+            .timeline-dot { left: -34px; }
+            .timeline-item.featured .timeline-dot { left: -36px; }
+            .year-marker .timeline-dot { left: -32px; }
+            .news-card { padding: 25px; }
+            .news-card h3 { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header id="navbar" class="scrolled">
+        <div class="container nav-content">
+            <div class="logo">
+                <a href="index.html"><img src="Assets/Logo-White.png" alt="Pixelence" class="brand-logo"></a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#technology">Technology</a></li>
+                    <li><a href="index.html#focus">Focus Areas</a></li>
+                    <li><a href="news.html">News</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <a href="contact.html" class="btn btn-outline">Contact Us</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ════════════ HERO ════════════ -->
+        <section class="news-hero">
+            <div class="container">
+                <h1>Pixelence <span class="highlight">News</span></h1>
+                <p>Milestones, partnerships, and breakthroughs on our mission to make brain MRI safer and more accessible.</p>
+            </div>
+        </section>
+
+        <!-- ════════════ TIMELINE ════════════ -->
+        <section class="news-section">
+            <div class="container">
+                <div class="timeline">
+
+                    <!-- ── 2026 ── -->
+                    <div class="year-marker reveal">
+                        <div class="timeline-dot"></div>
+                        <h2>2026</h2>
+                    </div>
+
+                    <!-- Patent Filing -->
+                    <div class="timeline-item featured reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="news-card">
+                            <div class="news-meta">
+                                <span class="news-date">March 11, 2026</span>
+                                <span class="news-tag">Intellectual Property</span>
+                            </div>
+                            <h3>Patent Filed for Gadolinium-Free Contrast MRI Synthesis</h3>
+                            <p>Pixelence has officially filed a patent for an AI system that generates brain contrast-enhanced MRI images without gadolinium contrast agents. The technology combines multi-sequence non-contrast MRI, deep pathology segmentation, and conditional generative models to create synthetic contrast &mdash; prioritising accuracy in pathology-positive regions.</p>
+                            <p>This milestone brings us closer to making neuro-oncology imaging safer, faster, and more accessible for patients and hospitals where contrast administration poses risks or logistical challenges.</p>
+                            <a href="https://www.linkedin.com/posts/pixelence_today-marks-a-big-milestone-for-pixelence-activity-7437505374393372673-u4Zx/" target="_blank" class="read-more">Read on LinkedIn &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- SelectUSA -->
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="news-card">
+                            <div class="news-meta">
+                                <span class="news-date">March 10, 2026</span>
+                                <span class="news-tag">Competition</span>
+                            </div>
+                            <h3>Selected to Pitch at SelectUSA Tech &mdash; Malaysia Session</h3>
+                            <p>Pixelence was selected as one of six Malaysian startups to pitch at the SelectUSA Tech virtual session, presenting our non-invasive brain MRI contrast enhancement solution to an international panel of judges. The winner receives a complimentary ticket to the SelectUSA Investment Summit in Maryland, USA &mdash; the highest-profile US event for promoting foreign direct investment.</p>
+                            <a href="https://www.linkedin.com/posts/pixelence_excited-to-share-that-pixelence-has-been-activity-7435126965549965312-usHW/" target="_blank" class="read-more">Read on LinkedIn &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- NEXEA Top 3 -->
+                    <div class="timeline-item featured reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="news-card">
+                            <div class="news-meta">
+                                <span class="news-date">March 5, 2026</span>
+                                <span class="news-tag">Accelerator</span>
+                            </div>
+                            <h3>Top 3 at NEXEA Selangor Life Sciences Accelerator</h3>
+                            <p>Pixelence was selected as a Top 3 startup in the NEXEA Selangor Life Sciences Accelerator finals, pitching alongside nine other life sciences and digital health teams. Alongside fellow winners BioLoop and PlusVibes, Pixelence received RM 20,000 in funding to further advance our AI-powered medical imaging solutions.</p>
+                            <p>Special thanks to mentors Ben Lim, Dr. Inky, and Vykintas Mineikis, and to NEXEA and Invest Selangor Berhad for their continued support of Malaysia's life sciences ecosystem.</p>
+                            <a href="https://www.linkedin.com/posts/rzubairi_honoured-to-share-that-pixelence-has-been-activity-7435111863161614336-Zy0c/" target="_blank" class="read-more">Read on LinkedIn &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- Podcast -->
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="news-card">
+                            <div class="news-meta">
+                                <span class="news-date">January 2026</span>
+                                <span class="news-tag">Media</span>
+                            </div>
+                            <h3>Featured on the Ctrl Alt Deliver Podcast</h3>
+                            <p>Our founder Raheel Zubairi joined host Yasin on the Ctrl Alt Deliver podcast to discuss how AI transitions from pilot to production in healthcare, why AI initiatives stall before reaching real-world deployment, and the unique challenges that arise when modern AI systems meet legacy hospital environments.</p>
+                            <a href="https://www.linkedin.com/posts/hassanbasharat_yasins-back-behind-the-mic-this-month-for-activity-7422889777802215424-IAAt/" target="_blank" class="read-more">Read on LinkedIn &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- ── 2025 ── -->
+                    <div class="year-marker reveal">
+                        <div class="timeline-dot"></div>
+                        <h2>2025</h2>
+                    </div>
+
+                    <!-- Deep-X Demo Day -->
+                    <div class="timeline-item featured reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="news-card">
+                            <div class="news-meta">
+                                <span class="news-date">October 8, 2025</span>
+                                <span class="news-tag">Accelerator</span>
+                            </div>
+                            <h3>Top 6 at Selangor Deep Tech Xccelerator (Deep-X) Final Demo Day</h3>
+                            <p>Pixelence earned a Top 6 position at the Deep-X Final Demo Day held at KLCC Hall 6, Kuala Lumpur, competing against 12 deep tech startups. Judges from Endeavour, Gobi Partners, Artem Ventures, Cradle, and MDEC evaluated the pitches.</p>
+                            <p>As a result, Pixelence was selected to represent Malaysia on an industry trip to South Korea (October 19&ndash;26, 2025) to advance AI-powered medical imaging within the global health tech ecosystem.</p>
+                            <a href="https://www.linkedin.com/posts/rzubairi_deepx-selangoraccelerator-pixelence-activity-7381635423472857088-08SG/" target="_blank" class="read-more">Read on LinkedIn &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- ── 2024 ── -->
+                    <div class="year-marker reveal">
+                        <div class="timeline-dot"></div>
+                        <h2>2024</h2>
+                    </div>
+
+                    <!-- BrainEnhance Launch -->
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="news-card">
+                            <div class="news-meta">
+                                <span class="news-date">June 2024</span>
+                                <span class="news-tag">Product</span>
+                            </div>
+                            <h3>BrainEnhance Technology Officially Introduced</h3>
+                            <p>Pixelence publicly introduced BrainEnhance &mdash; our AI software that generates synthetic contrast-enhanced MRI scans from native non-contrast sequences using a generative U-Net architecture with attention blocks. The technology reduces imaging costs by 30%, enhances patient safety by eliminating gadolinium contrast agent risks, and enables more frequent monitoring for patients needing regular scans.</p>
+                            <a href="https://www.linkedin.com/posts/pixelence_pixelence-brochure-artificial-ai-enhancement-activity-7211691536474857472-hnB0/" target="_blank" class="read-more">Read on LinkedIn &rarr;</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ════════════ CTA ════════════ -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>Stay <span class="highlight">Connected</span></h2>
+                <p>Follow our journey as we transform brain MRI imaging.</p>
+                <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="Assets/Logo-White.png" alt="Pixelence" class="brand-logo">
+                    </a>
+                </div>
+                <p>Pixelence is changing brain medical imaging by eliminating Gadolinium and using 95% accurate predictions, making brain tumour treatment more affordable and safer, and saving 100 minutes of patients' and hospitals' time on every visit.</p>
+                <p class="experience-badge">56 years of combined experience</p>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="index.html#focus">Focus Areas</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="super-resolution.html">Brain Super Resolution</a></li>
+                    <li><a href="fat-suppression.html">Brain Fat Suppression</a></li>
+                    <li><a href="enhance.html">Brain Enhance</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2026 All Rights Reserved. Pixelence AI.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

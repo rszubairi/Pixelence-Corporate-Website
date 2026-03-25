@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Super Resolution | Pixelence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ── Hero ── */
+        .product-hero { padding: 150px 0 80px; }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            max-width: 520px;
+        }
+
+        /* ── SR Canvas in hero ── */
+        .sr-canvas-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 1;
+            margin: 0 auto;
+        }
+
+        .sr-canvas-wrap canvas { width: 100%; height: 100%; display: block; }
+
+        /* ── Section basics ── */
+        .section-dark  { padding: 100px 0; background: var(--bg-dark); }
+        .section-darker { padding: 100px 0; background: var(--bg-darker); }
+
+        .section-title {
+            font-size: 2.4rem;
+            margin-bottom: 15px;
+        }
+
+        .section-lead {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 680px;
+            margin: 0 auto 50px;
+        }
+
+        .center { text-align: center; }
+
+        /* ── Benefits cards ── */
+        .benefits-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .b-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(157,141,241,0.12);
+            border-radius: 14px;
+            padding: 35px 28px;
+            transition: var(--transition);
+        }
+
+        .b-card:hover {
+            border-color: var(--secondary-color);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(75,33,204,0.2);
+        }
+
+        .b-icon-circle {
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(75,33,204,0.25), rgba(255,94,133,0.15));
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 22px;
+        }
+
+        .b-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+        .b-card p  { color: var(--text-muted); font-size: 0.95rem; line-height: 1.65; }
+
+        /* ── How-it-works pipeline ── */
+        .pipeline-wrap {
+            position: relative;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .pipeline-steps {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0;
+            align-items: start;
+            position: relative;
+        }
+
+        .pipe-step {
+            text-align: center;
+            position: relative;
+            padding: 0 10px;
+        }
+
+        .pipe-visual {
+            width: 110px; height: 110px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            border: 2px solid rgba(157,141,241,0.3);
+            display: flex; align-items: center; justify-content: center;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            background: rgba(13,13,21,0.8);
+        }
+
+        .pipe-step:nth-child(3) .pipe-visual {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 25px rgba(255,94,133,0.25);
+        }
+
+        .pipe-step:last-child .pipe-visual {
+            border-color: #50e890;
+            box-shadow: 0 0 25px rgba(80,232,144,0.2);
+        }
+
+        .pipe-step h4 { font-size: 0.95rem; margin-bottom: 6px; color: var(--text-light); }
+        .pipe-step p  { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+
+        .pipeline-line {
+            position: absolute;
+            top: 55px;
+            left: 10%; right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg,
+                rgba(157,141,241,0.15),
+                var(--secondary-color),
+                var(--accent-color),
+                var(--secondary-color),
+                rgba(80,232,144,0.4));
+            z-index: 0;
+        }
+
+        .pipeline-line::after {
+            content: '';
+            position: absolute;
+            top: -1px; left: 0;
+            width: 60px; height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            border-radius: 2px;
+            animation: pipeFlow 3s linear infinite;
+        }
+
+        @keyframes pipeFlow {
+            0%   { left: -60px; }
+            100% { left: 100%; }
+        }
+
+        .pipe-visual svg { width: 48px; height: 48px; }
+
+        /* ── SR demo canvas ── */
+        .sr-demo-wrap {
+            position: relative;
+            max-width: 700px;
+            margin: 60px auto 0;
+            aspect-ratio: 16/9;
+        }
+
+        .sr-demo-wrap canvas {
+            width: 100%; height: 100%; display: block;
+            border-radius: 14px;
+            border: 1px solid rgba(157,141,241,0.15);
+        }
+
+        /* ── Metrics bar ── */
+        .metrics-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .m-item h3 {
+            font-size: 2.6rem;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+        }
+
+        .m-item p { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+
+        /* ── Use-cases ── */
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .uc-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(157,141,241,0.1);
+            border-radius: 14px;
+            padding: 30px;
+            transition: var(--transition);
+        }
+
+        .uc-card:hover { border-color: var(--secondary-color); transform: translateY(-5px); }
+        .uc-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
+        .uc-card p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; }
+
+        /* ── CTA ── */
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+        }
+
+        .cta-section h2 { font-size: 2.4rem; margin-bottom: 18px; }
+        .cta-section p  { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 35px; }
+
+        /* ── Responsive ── */
+        @media (max-width: 992px) {
+            .hero-split { grid-template-columns: 1fr; text-align: center; }
+            .hero-subtitle { margin: 0 auto; }
+            .hero-right { margin-top: 40px; }
+            .benefits-row, .use-cases-grid { grid-template-columns: 1fr 1fr; }
+            .pipeline-steps { grid-template-columns: 1fr; gap: 30px; }
+            .pipeline-line { display: none; }
+            .metrics-bar { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .benefits-row, .use-cases-grid, .metrics-bar { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header id="navbar" class="scrolled">
+        <div class="container nav-content">
+            <div class="logo">
+                <a href="index.html"><img src="Assets/Logo-White.png" alt="Pixelence" class="brand-logo"></a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#technology">Technology</a></li>
+                    <li><a href="index.html#focus">Focus Areas</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <a href="contact.html" class="btn btn-outline">Contact Us</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ════════════ HERO ════════════ -->
+        <section class="product-hero">
+            <div class="container hero-split">
+                <div class="hero-left">
+                    <h1>Brain <span class="highlight">Super Resolution</span></h1>
+                    <p class="hero-subtitle">A deep learning network that upscales, denoises, and enhances brain MRI scans up to 4x their original resolution. Trained on 250,000+ high-resolution medical scans, BrainSR transforms fast, low-resolution acquisitions into pristine diagnostic-quality images.</p>
+                    <div class="hero-buttons" style="margin-top:35px;">
+                        <a href="contact.html" class="btn btn-primary">Request a Demo</a>
+                        <a href="#how-it-works" class="btn btn-outline">See How It Works</a>
+                    </div>
+                </div>
+                <div class="hero-right">
+                    <div class="sr-canvas-wrap">
+                        <canvas id="heroSRCanvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════════════ METRICS ════════════ -->
+        <section class="section-darker">
+            <div class="container">
+                <div class="metrics-bar reveal">
+                    <div class="m-item">
+                        <h3>4x</h3>
+                        <p>Resolution Upscale</p>
+                    </div>
+                    <div class="m-item">
+                        <h3>250K+</h3>
+                        <p>Training Scans</p>
+                    </div>
+                    <div class="m-item">
+                        <h3>&gt;85%</h3>
+                        <p>SSIM Accuracy</p>
+                    </div>
+                    <div class="m-item">
+                        <h3>&gt;30dB</h3>
+                        <p>PSNR Quality</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════════════ BENEFITS ════════════ -->
+        <section class="section-dark">
+            <div class="container">
+                <div class="center">
+                    <h2 class="section-title">Why Brain <span class="highlight">Super Resolution</span>?</h2>
+                    <p class="section-lead">Standard MRI scans often trade resolution for speed. BrainSR eliminates that compromise &mdash; transforming rapid, low-resolution acquisitions into images with outstanding anatomical detail.</p>
+                </div>
+
+                <div class="benefits-row reveal">
+                    <div class="b-card">
+                        <div class="b-icon-circle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--secondary-color)" stroke-width="2" stroke-linecap="round" width="28" height="28"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                        </div>
+                        <h3>4x Resolution Enhancement</h3>
+                        <p>Upscale from 160x160 to 640x640 pixels (configurable up to 1024x1024), revealing fine anatomical structures invisible in the original scan.</p>
+                    </div>
+                    <div class="b-card">
+                        <div class="b-icon-circle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" width="28" height="28"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                        </div>
+                        <h3>Faster Scan Protocols</h3>
+                        <p>Operators can perform rapid, low-resolution scans and rely on BrainSR to reconstruct high-quality output &mdash; increasing patient throughput and reducing wait times.</p>
+                    </div>
+                    <div class="b-card">
+                        <div class="b-icon-circle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--secondary-color)" stroke-width="2" stroke-linecap="round" width="28" height="28"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        </div>
+                        <h3>Intelligent Denoising</h3>
+                        <p>Simultaneously removes acquisition noise and artefacts while preserving critical diagnostic features, delivering cleaner images than the source hardware alone.</p>
+                    </div>
+                    <div class="b-card">
+                        <div class="b-icon-circle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" width="28" height="28"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                        </div>
+                        <h3>Diagnostic Confidence</h3>
+                        <p>Validated on tumour datasets including Schwannoma and GBM, achieving &gt;85% SSIM and &gt;30 dB PSNR against ground truth high-resolution scans.</p>
+                    </div>
+                    <div class="b-card">
+                        <div class="b-icon-circle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--secondary-color)" stroke-width="2" stroke-linecap="round" width="28" height="28"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        </div>
+                        <h3>Reduced Rescan Rates</h3>
+                        <p>Salvage motion-degraded or noisy acquisitions that would normally require the patient to be re-scanned, saving time and cost for both clinic and patient.</p>
+                    </div>
+                    <div class="b-card">
+                        <div class="b-icon-circle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" width="28" height="28"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        </div>
+                        <h3>Seamless Integration</h3>
+                        <p>Accepts standard grayscale MRI input and delivers enhanced output compatible with existing PACS workflows. No hardware upgrades required.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════════════ HOW IT WORKS ════════════ -->
+        <section id="how-it-works" class="section-darker">
+            <div class="container">
+                <div class="center">
+                    <h2 class="section-title">How It <span class="highlight">Works</span></h2>
+                    <p class="section-lead">BrainSR uses a Conditional Generative Adversarial Network with deep residual blocks and curriculum learning to progressively reconstruct high-resolution detail from low-resolution input.</p>
+                </div>
+
+                <div class="pipeline-wrap reveal">
+                    <div class="pipeline-line"></div>
+                    <div class="pipeline-steps">
+                        <!-- Step 1 -->
+                        <div class="pipe-step">
+                            <div class="pipe-visual">
+                                <svg viewBox="0 0 48 48" fill="none">
+                                    <rect x="10" y="10" width="28" height="28" rx="3" stroke="var(--secondary-color)" stroke-width="2" stroke-dasharray="4 2"/>
+                                    <rect x="16" y="16" width="16" height="16" rx="2" stroke="var(--secondary-color)" stroke-width="1.5" opacity="0.6"/>
+                                    <text x="24" y="27" text-anchor="middle" fill="var(--text-muted)" font-size="7" font-family="Montserrat" font-weight="600">160</text>
+                                </svg>
+                            </div>
+                            <h4>Low-Res Input</h4>
+                            <p>A standard 160x160 MRI scan is captured using a fast acquisition protocol.</p>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="pipe-step">
+                            <div class="pipe-visual">
+                                <svg viewBox="0 0 48 48" fill="none">
+                                    <rect x="8" y="12" width="32" height="24" rx="3" stroke="var(--secondary-color)" stroke-width="2"/>
+                                    <line x1="8" y1="24" x2="40" y2="24" stroke="var(--secondary-color)" stroke-width="1" opacity="0.4"/>
+                                    <line x1="24" y1="12" x2="24" y2="36" stroke="var(--secondary-color)" stroke-width="1" opacity="0.4"/>
+                                    <circle cx="18" cy="20" r="2" fill="var(--secondary-color)" opacity="0.5"/>
+                                    <circle cx="30" cy="28" r="2" fill="var(--secondary-color)" opacity="0.5"/>
+                                </svg>
+                            </div>
+                            <h4>Normalise &amp; Degrade</h4>
+                            <p>Pixel normalisation and synthetic degradation modelling prepare the input for the generator.</p>
+                        </div>
+
+                        <!-- Step 3 – GAN core -->
+                        <div class="pipe-step">
+                            <div class="pipe-visual">
+                                <svg viewBox="0 0 48 48" fill="none">
+                                    <!-- Generator side -->
+                                    <circle cx="10" cy="16" r="3" fill="var(--accent-color)" opacity="0.8"/>
+                                    <circle cx="10" cy="24" r="3" fill="var(--accent-color)" opacity="0.8"/>
+                                    <circle cx="10" cy="32" r="3" fill="var(--accent-color)" opacity="0.8"/>
+                                    <!-- Residual blocks -->
+                                    <circle cx="22" cy="18" r="3" fill="var(--secondary-color)"/>
+                                    <circle cx="22" cy="30" r="3" fill="var(--secondary-color)"/>
+                                    <!-- Upsampled -->
+                                    <circle cx="34" cy="16" r="3" fill="var(--secondary-color)"/>
+                                    <circle cx="34" cy="24" r="3" fill="var(--secondary-color)"/>
+                                    <circle cx="34" cy="32" r="3" fill="var(--secondary-color)"/>
+                                    <!-- Connections -->
+                                    <line x1="13" y1="16" x2="19" y2="18" stroke="var(--text-muted)" stroke-width="0.8"/>
+                                    <line x1="13" y1="16" x2="19" y2="30" stroke="var(--text-muted)" stroke-width="0.5"/>
+                                    <line x1="13" y1="24" x2="19" y2="18" stroke="var(--text-muted)" stroke-width="0.5"/>
+                                    <line x1="13" y1="24" x2="19" y2="30" stroke="var(--text-muted)" stroke-width="0.8"/>
+                                    <line x1="13" y1="32" x2="19" y2="18" stroke="var(--text-muted)" stroke-width="0.5"/>
+                                    <line x1="13" y1="32" x2="19" y2="30" stroke="var(--text-muted)" stroke-width="0.8"/>
+                                    <line x1="25" y1="18" x2="31" y2="16" stroke="var(--text-muted)" stroke-width="0.8"/>
+                                    <line x1="25" y1="18" x2="31" y2="24" stroke="var(--text-muted)" stroke-width="0.8"/>
+                                    <line x1="25" y1="18" x2="31" y2="32" stroke="var(--text-muted)" stroke-width="0.5"/>
+                                    <line x1="25" y1="30" x2="31" y2="16" stroke="var(--text-muted)" stroke-width="0.5"/>
+                                    <line x1="25" y1="30" x2="31" y2="24" stroke="var(--text-muted)" stroke-width="0.8"/>
+                                    <line x1="25" y1="30" x2="31" y2="32" stroke="var(--text-muted)" stroke-width="0.8"/>
+                                    <!-- Skip connection arc -->
+                                    <path d="M10 12 Q22 6 34 12" stroke="var(--accent-color)" stroke-width="1" fill="none" stroke-dasharray="2 2" opacity="0.6"/>
+                                </svg>
+                            </div>
+                            <h4>GAN Super-Resolution</h4>
+                            <p>A generator with 24 residual blocks reconstructs detail, while a discriminator ensures perceptual realism.</p>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="pipe-step">
+                            <div class="pipe-visual">
+                                <svg viewBox="0 0 48 48" fill="none">
+                                    <rect x="6" y="6" width="36" height="36" rx="3" stroke="var(--secondary-color)" stroke-width="2"/>
+                                    <!-- sharpening lines -->
+                                    <line x1="12" y1="18" x2="36" y2="18" stroke="var(--secondary-color)" stroke-width="1.2"/>
+                                    <line x1="12" y1="24" x2="36" y2="24" stroke="var(--accent-color)" stroke-width="1.5"/>
+                                    <line x1="12" y1="30" x2="36" y2="30" stroke="var(--secondary-color)" stroke-width="1.2"/>
+                                    <!-- detail pixels -->
+                                    <rect x="14" y="13" width="4" height="3" rx="0.5" fill="var(--secondary-color)" opacity="0.4"/>
+                                    <rect x="22" y="13" width="4" height="3" rx="0.5" fill="var(--accent-color)" opacity="0.5"/>
+                                    <rect x="30" y="13" width="4" height="3" rx="0.5" fill="var(--secondary-color)" opacity="0.4"/>
+                                    <rect x="18" y="33" width="4" height="3" rx="0.5" fill="var(--secondary-color)" opacity="0.4"/>
+                                    <rect x="26" y="33" width="4" height="3" rx="0.5" fill="var(--accent-color)" opacity="0.5"/>
+                                </svg>
+                            </div>
+                            <h4>Perceptual Refinement</h4>
+                            <p>VGG19 perceptual loss and adversarial sharpening produce crisp, diagnostically faithful textures.</p>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="pipe-step">
+                            <div class="pipe-visual">
+                                <svg viewBox="0 0 48 48" fill="none">
+                                    <rect x="6" y="6" width="36" height="36" rx="3" stroke="#50e890" stroke-width="2"/>
+                                    <text x="24" y="27" text-anchor="middle" fill="#50e890" font-size="7" font-family="Montserrat" font-weight="700">640</text>
+                                    <path d="M16 35l4 4 8-8" stroke="#50e890" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+                                </svg>
+                            </div>
+                            <h4>High-Res Output</h4>
+                            <p>A 640x640 (or up to 1024x1024) image with enhanced clarity, ready for radiologist review.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Animated SR demo canvas -->
+                <div class="sr-demo-wrap reveal">
+                    <canvas id="srDemoCanvas"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════════════ CLINICAL USE CASES ════════════ -->
+        <section class="section-dark">
+            <div class="container">
+                <div class="center">
+                    <h2 class="section-title">Clinical <span class="highlight">Applications</span></h2>
+                    <p class="section-lead">BrainSR empowers radiologists and imaging centres with sharper diagnostics across a range of clinical scenarios.</p>
+                </div>
+
+                <div class="use-cases-grid reveal">
+                    <div class="uc-card">
+                        <h3>Tumour Assessment</h3>
+                        <p>Reveal fine margins and micro-structures in brain tumours including Schwannoma and GBM, enabling more precise treatment planning and surgical guidance.</p>
+                    </div>
+                    <div class="uc-card">
+                        <h3>High-Throughput Clinics</h3>
+                        <p>Run faster, lower-resolution scan protocols and let BrainSR reconstruct diagnostic-quality images &mdash; reducing scan time and increasing daily patient volume.</p>
+                    </div>
+                    <div class="uc-card">
+                        <h3>Legacy Equipment Enhancement</h3>
+                        <p>Breathe new life into older MRI hardware by computationally boosting the resolution of scans beyond the physical limits of the scanner.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════════════ CTA ════════════ -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready for <span class="highlight">4x Clarity</span>?</h2>
+                <p>See BrainSR in action with your own imaging data.</p>
+                <a href="contact.html" class="btn btn-primary">Request a Demo</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="Assets/Logo-White.png" alt="Pixelence" class="brand-logo">
+                    </a>
+                </div>
+                <p>Pixelence is changing brain medical imaging by eliminating Gadolinium and using 95% accurate predictions, making brain tumour treatment more affordable and safer, and saving 100 minutes of patients' and hospitals' time on every visit.</p>
+                <p class="experience-badge">56 years of combined experience</p>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="index.html#focus">Focus Areas</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="super-resolution.html">Brain Super Resolution</a></li>
+                    <li><a href="fat-suppression.html">Brain Fat Suppression</a></li>
+                    <li><a href="enhance.html">Brain Enhance</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2026 All Rights Reserved. Pixelence AI.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+    /* ──────────────────────────────────────────────
+       HERO – Animated GAN Super-Resolution Network
+       Shows low-res pixels → residual blocks → upsampled output
+       ────────────────────────────────────────────── */
+    (function () {
+        const c = document.getElementById('heroSRCanvas');
+        if (!c) return;
+        const ctx = c.getContext('2d');
+        let W, H;
+
+        function resize() {
+            const r = window.devicePixelRatio || 1;
+            const rect = c.parentElement.getBoundingClientRect();
+            W = rect.width; H = rect.height;
+            c.width = W * r; c.height = H * r;
+            ctx.setTransform(r, 0, 0, r, 0, 0);
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const primary = '#9D8DF1';
+        const accent = '#FF5E85';
+        const green = '#50e890';
+        let t = 0;
+
+        // Network layout: Input(4x4 pixel grid) → ResBlocks(3 layers) → Upsample → Output(8x8 grid)
+        function draw() {
+            t += 0.012;
+            ctx.clearRect(0, 0, W, H);
+
+            const cx = W / 2;
+            const cy = H / 2;
+
+            // ── Left: Low-res pixel grid (blurry) ──
+            const gridL = 4;
+            const cellL = 18;
+            const startLX = cx - 200;
+            const startLY = cy - (gridL * cellL) / 2;
+
+            ctx.font = '600 10px Montserrat, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillStyle = primary;
+            ctx.fillText('160 x 160 Input', startLX + (gridL * cellL) / 2, startLY - 14);
+
+            for (let r = 0; r < gridL; r++) {
+                for (let col = 0; col < gridL; col++) {
+                    const x = startLX + col * cellL;
+                    const y = startLY + r * cellL;
+                    const brightness = 0.15 + Math.sin(t * 2 + r * 0.5 + col * 0.7) * 0.1;
+                    ctx.fillStyle = `rgba(157,141,241,${brightness})`;
+                    ctx.fillRect(x, y, cellL - 2, cellL - 2);
+                    ctx.strokeStyle = `rgba(157,141,241,0.3)`;
+                    ctx.lineWidth = 0.5;
+                    ctx.strokeRect(x, y, cellL - 2, cellL - 2);
+                }
+            }
+
+            // ── Middle: Residual blocks + connections ──
+            const resLayers = [4, 6, 4];
+            const layerSpacing = 70;
+            const nodeSpacing = 28;
+            const resStartX = cx - 60;
+
+            // Draw label
+            ctx.fillStyle = accent;
+            ctx.fillText('Generator (24 Residual Blocks)', cx, startLY - 14);
+
+            const allNodes = [];
+
+            for (let l = 0; l < resLayers.length; l++) {
+                const layerNodes = [];
+                const lx = resStartX + l * layerSpacing;
+                const count = resLayers[l];
+                for (let n = 0; n < count; n++) {
+                    const ny = cy + (n - (count - 1) / 2) * nodeSpacing;
+                    layerNodes.push({ x: lx, y: ny });
+                }
+                allNodes.push(layerNodes);
+            }
+
+            // Connections between layers
+            for (let l = 0; l < allNodes.length - 1; l++) {
+                for (let i = 0; i < allNodes[l].length; i++) {
+                    for (let j = 0; j < allNodes[l + 1].length; j++) {
+                        const a = allNodes[l][i], b = allNodes[l + 1][j];
+                        const phase = (t * 2 + l * 0.4 + i * 0.15 + j * 0.1) % 1;
+                        const alpha = 0.05 + 0.1 * Math.sin(phase * Math.PI);
+                        ctx.strokeStyle = `rgba(255,94,133,${alpha})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.beginPath();
+                        ctx.moveTo(a.x, a.y);
+                        ctx.lineTo(b.x, b.y);
+                        ctx.stroke();
+
+                        // data pulse
+                        const dp = (t * 0.7 + l * 0.2 + i * 0.08 + j * 0.06) % 1;
+                        const dx = a.x + (b.x - a.x) * dp;
+                        const dy = a.y + (b.y - a.y) * dp;
+                        ctx.fillStyle = `rgba(255,94,133,${Math.sin(dp * Math.PI) * 0.5})`;
+                        ctx.beginPath();
+                        ctx.arc(dx, dy, 1.5, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+            }
+
+            // Skip connection (residual)
+            if (allNodes.length >= 3) {
+                const skipAlpha = 0.2 + Math.sin(t * 3) * 0.15;
+                ctx.strokeStyle = `rgba(255,94,133,${skipAlpha})`;
+                ctx.lineWidth = 1.2;
+                ctx.setLineDash([4, 4]);
+                ctx.beginPath();
+                const sa = allNodes[0][0], sb = allNodes[2][0];
+                ctx.moveTo(sa.x, sa.y - 16);
+                ctx.quadraticCurveTo((sa.x + sb.x) / 2, sa.y - 60, sb.x, sb.y - 16);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Label skip connection
+                ctx.font = '500 8px Montserrat, sans-serif';
+                ctx.fillStyle = `rgba(255,94,133,${skipAlpha + 0.2})`;
+                ctx.fillText('skip', (sa.x + sb.x) / 2, sa.y - 52);
+            }
+
+            // Nodes
+            for (let l = 0; l < allNodes.length; l++) {
+                for (let n = 0; n < allNodes[l].length; n++) {
+                    const { x, y } = allNodes[l][n];
+                    const pulse = Math.sin(t * 3 + l + n) * 0.3 + 0.7;
+                    const col = accent;
+
+                    const grad = ctx.createRadialGradient(x, y, 0, x, y, 14);
+                    grad.addColorStop(0, col);
+                    grad.addColorStop(1, 'transparent');
+                    ctx.globalAlpha = pulse * 0.2;
+                    ctx.fillStyle = grad;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 14, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.globalAlpha = 1;
+
+                    ctx.fillStyle = col;
+                    ctx.globalAlpha = 0.7 + pulse * 0.3;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 5, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.globalAlpha = 1;
+                }
+            }
+
+            // ── Connecting arrows: input grid → network ──
+            const arrowAlpha = 0.15 + Math.sin(t * 2) * 0.1;
+            ctx.strokeStyle = `rgba(157,141,241,${arrowAlpha})`;
+            ctx.lineWidth = 1.2;
+            const gridRightX = startLX + gridL * cellL + 4;
+            const netLeftX = allNodes[0][0].x - 10;
+            ctx.beginPath();
+            ctx.moveTo(gridRightX, cy);
+            ctx.lineTo(netLeftX, cy);
+            ctx.stroke();
+            // arrow head
+            ctx.fillStyle = `rgba(157,141,241,${arrowAlpha + 0.1})`;
+            ctx.beginPath();
+            ctx.moveTo(netLeftX, cy);
+            ctx.lineTo(netLeftX - 6, cy - 4);
+            ctx.lineTo(netLeftX - 6, cy + 4);
+            ctx.closePath();
+            ctx.fill();
+
+            // ── Connecting arrow: network → output grid ──
+            const lastLayer = allNodes[allNodes.length - 1];
+            const netRightX = lastLayer[0].x + 10;
+            const gridRStartX = cx + 130;
+            ctx.strokeStyle = `rgba(157,141,241,${arrowAlpha})`;
+            ctx.beginPath();
+            ctx.moveTo(netRightX, cy);
+            ctx.lineTo(gridRStartX - 4, cy);
+            ctx.stroke();
+            ctx.fillStyle = `rgba(157,141,241,${arrowAlpha + 0.1})`;
+            ctx.beginPath();
+            ctx.moveTo(gridRStartX - 4, cy);
+            ctx.lineTo(gridRStartX - 10, cy - 4);
+            ctx.lineTo(gridRStartX - 10, cy + 4);
+            ctx.closePath();
+            ctx.fill();
+
+            // ── Right: High-res pixel grid (sharp) ──
+            const gridH = 8;
+            const cellH = 10;
+            const startHX = gridRStartX;
+            const startHY = cy - (gridH * cellH) / 2;
+
+            ctx.font = '600 10px Montserrat, sans-serif';
+            ctx.fillStyle = green;
+            ctx.fillText('640 x 640 Output', startHX + (gridH * cellH) / 2, startHY - 14);
+
+            for (let r = 0; r < gridH; r++) {
+                for (let col = 0; col < gridH; col++) {
+                    const x = startHX + col * cellH;
+                    const y = startHY + r * cellH;
+                    const wave = Math.sin(t * 1.5 + r * 0.4 + col * 0.3);
+                    const brightness = 0.2 + wave * 0.12;
+                    ctx.fillStyle = `rgba(80,232,144,${brightness})`;
+                    ctx.fillRect(x, y, cellH - 1, cellH - 1);
+                    ctx.strokeStyle = `rgba(80,232,144,0.2)`;
+                    ctx.lineWidth = 0.3;
+                    ctx.strokeRect(x, y, cellH - 1, cellH - 1);
+                }
+            }
+
+            // ── Discriminator feedback loop (bottom arc) ──
+            const discAlpha = 0.12 + Math.sin(t * 2.5) * 0.08;
+            ctx.strokeStyle = `rgba(157,141,241,${discAlpha})`;
+            ctx.lineWidth = 1;
+            ctx.setLineDash([3, 5]);
+            ctx.beginPath();
+            ctx.moveTo(startHX + (gridH * cellH) / 2, startHY + gridH * cellH + 8);
+            ctx.quadraticCurveTo(cx, cy + 140, startLX + (gridL * cellL) / 2, startLY + gridL * cellL + 8);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.font = '500 9px Montserrat, sans-serif';
+            ctx.fillStyle = `rgba(157,141,241,${discAlpha + 0.15})`;
+            ctx.fillText('Discriminator Feedback', cx, cy + 115);
+
+            // Travelling dot on feedback arc
+            const fbProgress = (t * 0.4) % 1;
+            const fbX = startHX + (gridH * cellH) / 2 + (startLX + (gridL * cellL) / 2 - startHX - (gridH * cellH) / 2) * fbProgress;
+            const fbBaseY = startHY + gridH * cellH + 8;
+            const fbPeakY = cy + 140;
+            const fbY = fbBaseY + (fbPeakY - fbBaseY) * Math.sin(fbProgress * Math.PI) * 0.7;
+            ctx.fillStyle = primary;
+            ctx.globalAlpha = 0.6;
+            ctx.beginPath();
+            ctx.arc(fbX, fbY, 3, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+
+            requestAnimationFrame(draw);
+        }
+
+        draw();
+    })();
+
+    /* ──────────────────────────────────────────────
+       SR DEMO – Animated progressive resolution
+       enhancement showing pixel reconstruction
+       ────────────────────────────────────────────── */
+    (function () {
+        const c = document.getElementById('srDemoCanvas');
+        if (!c) return;
+        const ctx = c.getContext('2d');
+        let W, H;
+
+        function resize() {
+            const r = window.devicePixelRatio || 1;
+            const rect = c.parentElement.getBoundingClientRect();
+            W = rect.width; H = rect.height || rect.width * 0.5625;
+            c.width = W * r; c.height = H * r;
+            ctx.setTransform(r, 0, 0, r, 0, 0);
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const primary = '#9D8DF1';
+        const accent = '#FF5E85';
+        const green = '#50e890';
+        let t = 0;
+
+        // Generate a stable brain-like pattern
+        const patternSeed = [];
+        for (let i = 0; i < 64; i++) {
+            patternSeed.push(Math.random());
+        }
+
+        function getBrainBrightness(gx, gy, gridSize) {
+            // Create a brain-shaped mask
+            const cx = gridSize / 2, cy = gridSize / 2;
+            const dx = (gx - cx) / cx, dy = (gy - cy) / cy;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist > 0.9) return 0;
+            // Brain-like intensity
+            const idx = (gx * 8 + gy) % patternSeed.length;
+            const base = patternSeed[idx];
+            const cortex = 1 - dist;
+            return cortex * (0.3 + base * 0.7);
+        }
+
+        function draw() {
+            t += 0.008;
+            ctx.clearRect(0, 0, W, H);
+
+            const cycleTime = 10;
+            const progress = (t % cycleTime) / cycleTime;
+
+            // Layout: two panels side by side
+            const panelW = W * 0.42;
+            const panelH = H * 0.75;
+            const gap = W * 0.08;
+            const leftX = (W - panelW * 2 - gap) / 2;
+            const rightX = leftX + panelW + gap;
+            const topY = (H - panelH) / 2 + 15;
+
+            // Resolution progression
+            // Phase 0-0.15: show low-res (4x4)
+            // Phase 0.15-0.5: residual blocks animating (particles)
+            // Phase 0.5-0.85: progressive reveal high-res (32x32)
+            // Phase 0.85-1.0: hold complete
+
+            const lowGridSize = 6;
+            const highGridSize = 24;
+
+            // ── Labels ──
+            ctx.font = '600 12px Montserrat, sans-serif';
+            ctx.textAlign = 'center';
+
+            ctx.fillStyle = primary;
+            ctx.fillText('Low Resolution Input', leftX + panelW / 2, topY - 12);
+
+            ctx.fillStyle = green;
+            ctx.fillText('Super-Resolved Output (4x)', rightX + panelW / 2, topY - 12);
+
+            // ── Left panel: low-res ──
+            const cellLow = Math.min(panelW / lowGridSize, panelH / lowGridSize);
+            const lowOffX = leftX + (panelW - cellLow * lowGridSize) / 2;
+            const lowOffY = topY + (panelH - cellLow * lowGridSize) / 2;
+
+            for (let gy = 0; gy < lowGridSize; gy++) {
+                for (let gx = 0; gx < lowGridSize; gx++) {
+                    const b = getBrainBrightness(gx, gy, lowGridSize);
+                    if (b <= 0) continue;
+                    const x = lowOffX + gx * cellLow;
+                    const y = lowOffY + gy * cellLow;
+                    // Blurry, noisy appearance
+                    const noise = Math.sin(t * 3 + gx * 2 + gy * 3) * 0.05;
+                    const alpha = Math.min(1, b * 0.6 + noise);
+                    ctx.fillStyle = `rgba(157,141,241,${alpha})`;
+                    ctx.fillRect(x + 1, y + 1, cellLow - 2, cellLow - 2);
+                }
+            }
+
+            // Low-res border
+            ctx.strokeStyle = `rgba(157,141,241,0.3)`;
+            ctx.lineWidth = 1;
+            ctx.strokeRect(lowOffX, lowOffY, cellLow * lowGridSize, cellLow * lowGridSize);
+
+            // ── Right panel: high-res progressive reveal ──
+            const cellHigh = Math.min(panelW / highGridSize, panelH / highGridSize);
+            const highOffX = rightX + (panelW - cellHigh * highGridSize) / 2;
+            const highOffY = topY + (panelH - cellHigh * highGridSize) / 2;
+
+            const revealProgress = progress < 0.15 ? 0 : Math.min((progress - 0.15) / 0.7, 1);
+
+            for (let gy = 0; gy < highGridSize; gy++) {
+                for (let gx = 0; gx < highGridSize; gx++) {
+                    // Map high-res coord to brain pattern
+                    const bx = (gx / highGridSize) * lowGridSize;
+                    const by = (gy / highGridSize) * lowGridSize;
+                    const b = getBrainBrightness(bx, by, lowGridSize);
+                    if (b <= 0) continue;
+
+                    // Progressive reveal: sweep from top-left
+                    const pixelOrder = (gy / highGridSize + gx / highGridSize) / 2;
+                    const pixelVisible = revealProgress > pixelOrder;
+                    if (!pixelVisible) continue;
+
+                    const localReveal = Math.min(1, (revealProgress - pixelOrder) * 5);
+
+                    const x = highOffX + gx * cellHigh;
+                    const y = highOffY + gy * cellHigh;
+                    const alpha = Math.min(1, b * 0.8 * localReveal);
+                    ctx.fillStyle = `rgba(80,232,144,${alpha})`;
+                    ctx.fillRect(x, y, cellHigh - 0.5, cellHigh - 0.5);
+                }
+            }
+
+            // High-res border
+            ctx.strokeStyle = `rgba(80,232,144,${0.15 + revealProgress * 0.2})`;
+            ctx.lineWidth = 1;
+            ctx.strokeRect(highOffX, highOffY, cellHigh * highGridSize, cellHigh * highGridSize);
+
+            // ── Center: processing indicator ──
+            const arrowCX = leftX + panelW + gap / 2;
+            const arrowCY = topY + panelH / 2;
+
+            if (revealProgress > 0 && revealProgress < 1) {
+                // Pulsing arrow
+                const arrowAlpha = 0.4 + Math.sin(t * 5) * 0.3;
+                ctx.fillStyle = `rgba(255,94,133,${arrowAlpha})`;
+                ctx.beginPath();
+                ctx.moveTo(arrowCX + 14, arrowCY);
+                ctx.lineTo(arrowCX - 6, arrowCY - 10);
+                ctx.lineTo(arrowCX - 6, arrowCY + 10);
+                ctx.closePath();
+                ctx.fill();
+
+                // Processing particles
+                for (let p = 0; p < 6; p++) {
+                    const pp = (t * 2 + p * 0.3) % 1;
+                    const px = leftX + panelW + gap * pp;
+                    const py = arrowCY + Math.sin(pp * Math.PI * 2 + p) * 15;
+                    const pAlpha = Math.sin(pp * Math.PI) * 0.6;
+                    ctx.fillStyle = `rgba(255,94,133,${pAlpha})`;
+                    ctx.beginPath();
+                    ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // Label
+                ctx.font = '600 10px Montserrat, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillStyle = accent;
+                ctx.fillText('BrainSR', arrowCX, arrowCY + 30);
+            } else if (revealProgress >= 1) {
+                // Complete checkmark
+                ctx.strokeStyle = green;
+                ctx.lineWidth = 2.5;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                ctx.beginPath();
+                ctx.moveTo(arrowCX - 8, arrowCY);
+                ctx.lineTo(arrowCX - 2, arrowCY + 6);
+                ctx.lineTo(arrowCX + 10, arrowCY - 8);
+                ctx.stroke();
+
+                ctx.font = '600 10px Montserrat, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillStyle = green;
+                ctx.fillText('4x Enhanced', arrowCX, arrowCY + 28);
+            } else {
+                // Waiting
+                ctx.font = '500 10px Montserrat, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillStyle = `rgba(157,141,241,0.5)`;
+                ctx.fillText('Analysing...', arrowCX, arrowCY + 5);
+            }
+
+            // ── Scan line on left panel ──
+            if (progress < 0.5) {
+                const scanLineY = lowOffY + (progress / 0.5) * (cellLow * lowGridSize);
+                ctx.strokeStyle = `rgba(255,94,133,0.5)`;
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(lowOffX, scanLineY);
+                ctx.lineTo(lowOffX + cellLow * lowGridSize, scanLineY);
+                ctx.stroke();
+
+                // glow
+                const scanGlow = ctx.createLinearGradient(lowOffX, scanLineY - 8, lowOffX, scanLineY + 8);
+                scanGlow.addColorStop(0, 'transparent');
+                scanGlow.addColorStop(0.5, `rgba(255,94,133,0.15)`);
+                scanGlow.addColorStop(1, 'transparent');
+                ctx.fillStyle = scanGlow;
+                ctx.fillRect(lowOffX, scanLineY - 8, cellLow * lowGridSize, 16);
+            }
+
+            // ── Bottom status text ──
+            ctx.font = '500 11px Montserrat, sans-serif';
+            ctx.textAlign = 'center';
+
+            if (progress < 0.15) {
+                ctx.fillStyle = primary;
+                ctx.fillText('Receiving low-resolution MRI scan...', W / 2, H - 20);
+            } else if (revealProgress < 1) {
+                const pct = Math.round(revealProgress * 100);
+                ctx.fillStyle = accent;
+                ctx.fillText(`Reconstructing high-resolution detail... ${pct}%`, W / 2, H - 20);
+            } else {
+                ctx.fillStyle = green;
+                ctx.fillText('Super-resolution complete \u2014 4x enhancement applied', W / 2, H - 20);
+            }
+
+            requestAnimationFrame(draw);
+        }
+
+        draw();
+    })();
+    </script>
+</body>
+</html>

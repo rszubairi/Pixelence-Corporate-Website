@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Pixelence</title>
+    <meta name="description"
+        content="Get in touch with Pixelence. Reach out for partnerships, inquiries about our AI-powered MRI imaging technology, or to learn more about our solutions.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Contact Page Specific Styles */
+        .contact-hero {
+            position: relative;
+            padding: 160px 0 80px;
+            background: var(--bg-darker);
+            overflow: hidden;
+        }
+
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -15%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(75, 33, 204, 0.12) 0%, rgba(26, 26, 46, 0) 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+        }
+
+        .contact-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 94, 133, 0.08) 0%, rgba(26, 26, 46, 0) 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+        }
+
+        .contact-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .contact-hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 600px;
+        }
+
+        /* Contact Layout */
+        .contact-section {
+            padding: 100px 0;
+            background: var(--bg-dark);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        /* Contact Info Cards */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .info-card {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            padding: 28px;
+            background: rgba(75, 33, 204, 0.06);
+            border: 1px solid rgba(157, 141, 241, 0.12);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .info-card:hover {
+            border-color: rgba(157, 141, 241, 0.3);
+            background: rgba(75, 33, 204, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .info-icon {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .info-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: var(--text-light);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .info-text h3 {
+            font-size: 1.15rem;
+            margin-bottom: 6px;
+            color: var(--text-light);
+        }
+
+        .info-text p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .info-text a {
+            color: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .info-text a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Contact Form */
+        .contact-form-wrapper {
+            background: rgba(13, 13, 21, 0.6);
+            border: 1px solid rgba(157, 141, 241, 0.15);
+            border-radius: var(--border-radius);
+            padding: 48px;
+        }
+
+        .contact-form-wrapper h2 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .contact-form-wrapper>p {
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            font-size: 0.95rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 14px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(157, 141, 241, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-light);
+            font-family: var(--font-primary);
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--secondary-color);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 3px rgba(157, 141, 241, 0.1);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(176, 176, 196, 0.5);
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239D8DF1' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 44px;
+        }
+
+        .form-group select option {
+            background: var(--bg-darker);
+            color: var(--text-light);
+        }
+
+        .form-group textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .contact-form .btn-primary {
+            width: 100%;
+            padding: 16px;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-primary);
+        }
+
+        .contact-form .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 18px 28px;
+            border-radius: 12px;
+            font-family: var(--font-primary);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-light);
+            z-index: 9999;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+        }
+
+        .toast.error {
+            background: linear-gradient(135deg, var(--accent-color), #e11d48);
+            box-shadow: 0 8px 24px rgba(255, 94, 133, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .contact-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contact-hero {
+                padding: 140px 0 60px;
+            }
+
+            .contact-hero h1 {
+                font-size: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form-wrapper {
+                padding: 32px 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header id="navbar">
+        <div class="container nav-content">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="Assets/Logo-White.png" alt="Pixelence" class="brand-logo">
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#technology">Technology</a></li>
+                    <li><a href="index.html#focus">Focus Areas</a></li>
+                    <li><a href="news.html">News</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <a href="contact.html" class="btn btn-outline">Contact Us</a>
+            </div>
+            <div class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="contact-hero">
+            <div class="container">
+                <h1>Get in <span class="highlight">Touch</span></h1>
+                <p>Have a question about our technology or interested in a partnership? We'd love to hear from you.</p>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div class="container contact-grid">
+                <div class="contact-info">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
+                        </div>
+                        <div class="info-text">
+                            <h3>Email Us</h3>
+                            <p><a href="mailto:info@pixelenceai.com">info@pixelenceai.com</a></p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                        </div>
+                        <div class="info-text">
+                            <h3>UK Headquarters</h3>
+                            <p>13 Grebe Road, Bicester,<br>Oxfordshire, OX26 6WG, England</p>
+                            <p><a href="tel:+447507782964">+44 7507 782964</a></p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                        </div>
+                        <div class="info-text">
+                            <h3>Europe Incubation Centre — Portugal</h3>
+                            <p>Campo Grande 016,<br>1749-016 Lisboa, Portugal</p>
+                            <p><a href="tel:+351217500000">+351 21 750 0000</a></p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                        </div>
+                        <div class="info-text">
+                            <h3>Development Centre — Malaysia</h3>
+                            <p>D-05-01, Level 5, Tamarind Square,<br>Cyberjaya, Selangor, 63000</p>
+                            <p><a href="tel:+60388009025">+6 03 8800 9025</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-wrapper">
+                    <h2>Send a Message</h2>
+                    <p>Fill out the form below and our team will get back to you shortly.</p>
+                    <form class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" placeholder="John" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject" required>
+                                <option value="" disabled selected>Select a topic</option>
+                                <option value="partnership">Partnership Inquiry</option>
+                                <option value="technology">Technology Question</option>
+                                <option value="clinical">Clinical Trials</option>
+                                <option value="media">Media & Press</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Tell us how we can help..."
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="Assets/Logo-White.png" alt="Pixelence" class="brand-logo">
+                    </a>
+                </div>
+                <p>Pixelence is changing brain medical imaging by eliminating Gadolinium and using 95% accurate predictions, making brain tumour treatment more affordable and safer, and saving 100 minutes of patients' and hospitals' time on every visit.</p>
+                <p class="experience-badge">56 years of combined experience</p>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="index.html#focus">Focus Areas</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="super-resolution.html">Brain Super Resolution</a></li>
+                    <li><a href="fat-suppression.html">Brain Fat Suppression</a></li>
+                    <li><a href="enhance.html">Brain Enhance</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2026 All Rights Reserved. Pixelence AI.</p>
+        </div>
+    </footer>
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        // Sticky Navbar
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ============================================
+        // EmailJS Configuration
+        // ============================================
+        // 1. Sign up at https://www.emailjs.com (free: 200 emails/month)
+        // 2. Create an Email Service (e.g. Gmail) and copy the Service ID
+        // 3. Create an Email Template with these variables:
+        //    {{from_name}}, {{from_email}}, {{subject}}, {{message}}
+        // 4. Copy your Public Key from Account > API Keys
+        // 5. Replace the three values below:
+        // ============================================
+        const EMAILJS_PUBLIC_KEY = '2MWgXGdErk6lMgGx1';
+        const EMAILJS_SERVICE_ID = 'service_9fatnhq';
+        const EMAILJS_TEMPLATE_ID = 'template_p80kfir';
+
+        emailjs.init(EMAILJS_PUBLIC_KEY);
+
+        // Toast notification
+        function showToast(message, type) {
+            const existing = document.querySelector('.toast');
+            if (existing) existing.remove();
+
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            requestAnimationFrame(() => toast.classList.add('show'));
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 400);
+            }, 4000);
+        }
+
+        // Form submission
+        const contactForm = document.querySelector('.contact-form');
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value.trim();
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            const templateParams = {
+                from_name: firstName + ' ' + lastName,
+                from_email: email,
+                subject: subject,
+                message: message
+            };
+
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+                .then(function () {
+                    showToast('Message sent successfully! We\'ll get back to you soon.', 'success');
+                    contactForm.reset();
+                })
+                .catch(function (error) {
+                    console.error('EmailJS error:', error);
+                    showToast('Failed to send message. Please try again or email us directly.', 'error');
+                })
+                .finally(function () {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send Message';
+                });
+        });
+    </script>
+</body>
+
+</html>

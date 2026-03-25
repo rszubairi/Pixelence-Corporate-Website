@@ -159,6 +159,7 @@ header.scrolled {
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
+    z-index: 1001;
 }
 
 .mobile-menu-btn span {
@@ -166,6 +167,19 @@ header.scrolled {
     height: 3px;
     background-color: var(--text-light);
     border-radius: 3px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.mobile-menu-btn.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
 }
 
 /* Hero Section */
@@ -182,8 +196,8 @@ header.scrolled {
     position: absolute;
     top: -20%;
     right: -10%;
-    width: 800px;
-    height: 800px;
+    width: min(800px, 100vw);
+    height: min(800px, 100vw);
     background: radial-gradient(circle, rgba(75, 33, 204, 0.15) 0%, rgba(26, 26, 46, 0) 70%);
     border-radius: 50%;
     z-index: -1;
@@ -1137,6 +1151,16 @@ footer {
     }
 
     .hero-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .dicom-stack {
+        width: min(400px, 80vw);
+        height: min(400px, 80vw);
+    }
+
+    .hero-buttons {
         justify-content: center;
     }
 
@@ -1156,9 +1180,47 @@ footer {
 
 @media (max-width: 768px) {
 
-    .nav-links,
+    .nav-content {
+        flex-wrap: wrap;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        order: 3;
+        padding: 20px 0 10px;
+        gap: 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li a {
+        display: block;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(157, 141, 241, 0.1);
+    }
+
+    .nav-links li:last-child a {
+        border-bottom: none;
+    }
+
     .nav-actions {
         display: none;
+        width: 100%;
+        order: 4;
+        padding: 10px 0 5px;
+    }
+
+    .nav-actions.active {
+        display: flex;
+    }
+
+    .nav-actions .btn {
+        width: 100%;
+        text-align: center;
     }
 
     .mobile-menu-btn {
@@ -1176,5 +1238,39 @@ footer {
 
     .hero-text h1 {
         font-size: 2.5rem;
+    }
+
+    .hero {
+        padding: 120px 0 60px;
+        min-height: auto;
+    }
+
+    .hero-background {
+        top: -10%;
+        right: -20%;
+        width: 100vw;
+        height: 100vw;
+    }
+
+    .dicom-stack {
+        width: min(300px, 75vw);
+        height: min(300px, 75vw);
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-buttons .btn {
+        text-align: center;
+    }
+
+    .product-hero {
+        padding: 120px 0 60px;
+    }
+
+    .hero-left h1 {
+        font-size: 2.2rem;
     }
 }

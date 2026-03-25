@@ -10,7 +10,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 2. Smooth Scrolling for Anchor Links
+    // 2. Mobile Menu Toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    const navActions = document.querySelector('.nav-actions');
+
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            if (navActions) navActions.classList.toggle('active');
+        });
+
+        // Close menu when a nav link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuBtn.classList.remove('active');
+                navLinks.classList.remove('active');
+                if (navActions) navActions.classList.remove('active');
+            });
+        });
+    }
+
+    // 3. Smooth Scrolling for Anchor Links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -25,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3. Scroll Reveal Animation
+    // 4. Scroll Reveal Animation
     const revealElements = document.querySelectorAll('.reveal');
 
     const revealOnScroll = () => {

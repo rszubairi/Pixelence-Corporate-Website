@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-page="fs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -240,13 +240,26 @@
             </div>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="index.html#home">Home</a></li>
-                    <li><a href="index.html#technology">Technology</a></li>
-                    <li><a href="index.html#focus">Focus Areas</a></li>
+                    <li><a href="index.html#home" data-i18n="nav.home">Home</a></li>
+                    <li><a href="index.html#technology" data-i18n="nav.technology">Technology</a></li>
+                    <li><a href="index.html#focus" data-i18n="nav.focusAreas">Focus Areas</a></li>
                 </ul>
             </nav>
             <div class="nav-actions">
-                <a href="contact.html" class="btn btn-outline">Contact Us</a>
+                <div class="lang-switcher">
+                    <button class="lang-btn" aria-label="Select language">
+                        <span id="current-lang-flag">EN</span>
+                        <svg width="10" height="6" viewBox="0 0 10 6"><polyline points="1 1 5 5 9 1" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                    </button>
+                    <div class="lang-dropdown">
+                        <button class="lang-option active" data-lang="en">EN English</button>
+                        <button class="lang-option" data-lang="ko">KO 한국어</button>
+                        <button class="lang-option" data-lang="ja">JA 日本語</button>
+                        <button class="lang-option" data-lang="de">DE Deutsch</button>
+                        <button class="lang-option" data-lang="fr">FR Français</button>
+                    </div>
+                </div>
+                <a href="contact.html" class="btn btn-outline" data-i18n="nav.contact">Contact Us</a>
             </div>
             <div class="mobile-menu-btn">
                 <span></span>
@@ -261,11 +274,11 @@
         <section class="product-hero">
             <div class="container hero-split">
                 <div class="hero-left">
-                    <h1>Brain <span class="highlight">Fat Suppression</span></h1>
-                    <p class="hero-subtitle">AI-powered fat signal suppression for brain MRI. Our 3D U-Net fuses multiple MRI sequences &mdash; T1, T2 and FLAIR &mdash; to computationally suppress fat artefacts, delivering cleaner diagnostic images without requiring specialised pulse sequences.</p>
+                    <h1 data-i18n="fs.heroTitle">Brain <span class="highlight" data-i18n="fs.heroHighlight">Fat Suppression</span></h1>
+                    <p class="hero-subtitle" data-i18n="fs.heroDesc">AI-powered fat signal suppression for brain MRI. Our 3D U-Net fuses multiple MRI sequences &mdash; T1, T2 and FLAIR &mdash; to computationally suppress fat artefacts, delivering cleaner diagnostic images without requiring specialised pulse sequences.</p>
                     <div class="hero-buttons" style="margin-top:35px;">
-                        <a href="contact.html" class="btn btn-primary">Request a Demo</a>
-                        <a href="#how-it-works" class="btn btn-outline">See How It Works</a>
+                        <a href="contact.html" class="btn btn-primary" data-i18n="fs.btnDemo">Request a Demo</a>
+                        <a href="#how-it-works" class="btn btn-outline" data-i18n="fs.btnHow">See How It Works</a>
                     </div>
                 </div>
                 <div class="hero-right">
@@ -282,19 +295,19 @@
                 <div class="metrics-bar reveal">
                     <div class="m-item">
                         <h3>3D</h3>
-                        <p>Volumetric Processing</p>
+                        <p data-i18n="fs.metric1Label">Volumetric Processing</p>
                     </div>
                     <div class="m-item">
                         <h3>Multi</h3>
-                        <p>Sequence Fusion</p>
+                        <p data-i18n="fs.metric2Label">Sequence Fusion</p>
                     </div>
                     <div class="m-item">
                         <h3>&gt;85%</h3>
-                        <p>SSIM Accuracy</p>
+                        <p data-i18n="fs.metric3Label">SSIM Accuracy</p>
                     </div>
                     <div class="m-item">
                         <h3>&gt;25dB</h3>
-                        <p>PSNR Quality</p>
+                        <p data-i18n="fs.metric4Label">PSNR Quality</p>
                     </div>
                 </div>
             </div>
@@ -304,8 +317,8 @@
         <section class="section-dark">
             <div class="container">
                 <div class="center">
-                    <h2 class="section-title">Why Brain <span class="highlight">Fat Suppression</span>?</h2>
-                    <p class="section-lead">Fat signals in brain MRI obscure critical tissue boundaries and mimic pathology. Traditional hardware-based suppression is time-consuming, prone to artefacts, and not always available. BrainFS solves this computationally.</p>
+                    <h2 class="section-title" data-i18n="fs.benefitsTitle">Why Brain <span class="highlight" data-i18n="fs.benefitsHighlight">Fat Suppression</span>?</h2>
+                    <p class="section-lead" data-i18n="fs.benefitsDesc">Fat signals in brain MRI obscure critical tissue boundaries and mimic pathology. Traditional hardware-based suppression is time-consuming, prone to artefacts, and not always available. BrainFS solves this computationally.</p>
                 </div>
 
                 <div class="benefits-row reveal">
@@ -313,43 +326,43 @@
                         <div class="b-icon-circle">
                             <svg viewBox="0 0 24 24" fill="none" stroke="var(--secondary-color)" stroke-width="2" stroke-linecap="round" width="28" height="28"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                         </div>
-                        <h3>Clearer Tissue Contrast</h3>
-                        <p>Removes fat signal contamination to reveal true tissue boundaries, improving visibility of lesions, oedema, and subtle pathological changes.</p>
+                        <h3 data-i18n="fs.ben1Title">Clearer Tissue Contrast</h3>
+                        <p data-i18n="fs.ben1Desc">Removes fat signal contamination to reveal true tissue boundaries, improving visibility of lesions, oedema, and subtle pathological changes.</p>
                     </div>
                     <div class="b-card">
                         <div class="b-icon-circle">
                             <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" width="28" height="28"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
                         </div>
-                        <h3>Multi-Modal Fusion</h3>
-                        <p>Combines information from T1, T2 and FLAIR sequences simultaneously, leveraging complementary contrast properties for superior suppression quality.</p>
+                        <h3 data-i18n="fs.ben2Title">Multi-Modal Fusion</h3>
+                        <p data-i18n="fs.ben2Desc">Combines information from T1, T2 and FLAIR sequences simultaneously, leveraging complementary contrast properties for superior suppression quality.</p>
                     </div>
                     <div class="b-card">
                         <div class="b-icon-circle">
                             <svg viewBox="0 0 24 24" fill="none" stroke="var(--secondary-color)" stroke-width="2" stroke-linecap="round" width="28" height="28"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
                         </div>
-                        <h3>True 3D Consistency</h3>
-                        <p>Processes entire volumes natively in 3D, maintaining spatial coherence across slices &mdash; eliminating the inter-slice artefacts of 2D approaches.</p>
+                        <h3 data-i18n="fs.ben3Title">True 3D Consistency</h3>
+                        <p data-i18n="fs.ben3Desc">Processes entire volumes natively in 3D, maintaining spatial coherence across slices &mdash; eliminating the inter-slice artefacts of 2D approaches.</p>
                     </div>
                     <div class="b-card">
                         <div class="b-icon-circle">
                             <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" width="28" height="28"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                         </div>
-                        <h3>No Extra Scan Time</h3>
-                        <p>Works with standard sequences already acquired in routine protocols. No additional pulse sequences, no extended scan sessions, no patient discomfort.</p>
+                        <h3 data-i18n="fs.ben4Title">No Extra Scan Time</h3>
+                        <p data-i18n="fs.ben4Desc">Works with standard sequences already acquired in routine protocols. No additional pulse sequences, no extended scan sessions, no patient discomfort.</p>
                     </div>
                     <div class="b-card">
                         <div class="b-icon-circle">
                             <svg viewBox="0 0 24 24" fill="none" stroke="var(--secondary-color)" stroke-width="2" stroke-linecap="round" width="28" height="28"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                         </div>
-                        <h3>Artefact Reduction</h3>
-                        <p>Attention-driven processing selectively targets fat signals while preserving genuine anatomical detail, avoiding the chemical-shift artefacts of hardware methods.</p>
+                        <h3 data-i18n="fs.ben5Title">Artefact Reduction</h3>
+                        <p data-i18n="fs.ben5Desc">Attention-driven processing selectively targets fat signals while preserving genuine anatomical detail, avoiding the chemical-shift artefacts of hardware methods.</p>
                     </div>
                     <div class="b-card">
                         <div class="b-icon-circle">
                             <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" width="28" height="28"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                         </div>
-                        <h3>Format Flexibility</h3>
-                        <p>Accepts both DICOM and NIfTI inputs, integrating seamlessly with hospital PACS systems and research workflows alike.</p>
+                        <h3 data-i18n="fs.ben6Title">Format Flexibility</h3>
+                        <p data-i18n="fs.ben6Desc">Accepts both DICOM and NIfTI inputs, integrating seamlessly with hospital PACS systems and research workflows alike.</p>
                     </div>
                 </div>
             </div>
@@ -359,8 +372,8 @@
         <section id="how-it-works" class="section-darker">
             <div class="container">
                 <div class="center">
-                    <h2 class="section-title">How It <span class="highlight">Works</span></h2>
-                    <p class="section-lead">BrainFS uses a 3D U-Net with CBAM attention modules to learn the mapping from multi-sequence input volumes to fat-suppressed output, trained with perceptual and pixel-level losses.</p>
+                    <h2 class="section-title" data-i18n="fs.howTitle">How It <span class="highlight" data-i18n="fs.howHighlight">Works</span></h2>
+                    <p class="section-lead" data-i18n="fs.howDesc">BrainFS uses a 3D U-Net with CBAM attention modules to learn the mapping from multi-sequence input volumes to fat-suppressed output, trained with perceptual and pixel-level losses.</p>
                 </div>
 
                 <div class="pipeline-wrap reveal">
@@ -376,8 +389,8 @@
                                     <text x="20" y="29" fill="var(--text-muted)" font-size="5" font-family="Montserrat" font-weight="600">T1 T2 FL</text>
                                 </svg>
                             </div>
-                            <h4>Multi-Sequence Input</h4>
-                            <p>T1, T2 and FLAIR volumes are loaded from DICOM or NIfTI format.</p>
+                            <h4 data-i18n="fs.step1Title">Multi-Sequence Input</h4>
+                            <p data-i18n="fs.step1Desc">T1, T2 and FLAIR volumes are loaded from DICOM or NIfTI format.</p>
                         </div>
 
                         <!-- Step 2 -->
@@ -394,8 +407,8 @@
                                     <circle cx="24" cy="24" r="2" fill="var(--accent-color)" opacity="0.6"/>
                                 </svg>
                             </div>
-                            <h4>Register &amp; Normalise</h4>
-                            <p>Volumes are aligned, resampled and normalised for consistent 3D processing.</p>
+                            <h4 data-i18n="fs.step2Title">Register &amp; Normalise</h4>
+                            <p data-i18n="fs.step2Desc">Volumes are aligned, resampled and normalised for consistent 3D processing.</p>
                         </div>
 
                         <!-- Step 3 – 3D U-Net -->
@@ -419,8 +432,8 @@
                                     <text x="24" y="40" text-anchor="middle" fill="var(--accent-color)" font-size="5" font-family="Montserrat" font-weight="700">CBAM</text>
                                 </svg>
                             </div>
-                            <h4>3D U-Net + Attention</h4>
-                            <p>A 4-level encoder-decoder with CBAM attention at each level separates fat from tissue.</p>
+                            <h4 data-i18n="fs.step3Title">3D U-Net + Attention</h4>
+                            <p data-i18n="fs.step3Desc">A 4-level encoder-decoder with CBAM attention at each level separates fat from tissue.</p>
                         </div>
 
                         <!-- Step 4 -->
@@ -440,8 +453,8 @@
                                     </circle>
                                 </svg>
                             </div>
-                            <h4>Fat Signal Removal</h4>
-                            <p>Perceptual and pixel-level losses ensure fat is suppressed while genuine anatomy is preserved.</p>
+                            <h4 data-i18n="fs.step4Title">Fat Signal Removal</h4>
+                            <p data-i18n="fs.step4Desc">Perceptual and pixel-level losses ensure fat is suppressed while genuine anatomy is preserved.</p>
                         </div>
 
                         <!-- Step 5 -->
@@ -455,8 +468,8 @@
                                     <path d="M16 35l4 4 8-8" stroke="#50e890" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
                                 </svg>
                             </div>
-                            <h4>Clean Output</h4>
-                            <p>A fat-suppressed 3D volume with preserved tissue contrast, ready for diagnosis.</p>
+                            <h4 data-i18n="fs.step5Title">Clean Output</h4>
+                            <p data-i18n="fs.step5Desc">A fat-suppressed 3D volume with preserved tissue contrast, ready for diagnosis.</p>
                         </div>
                     </div>
                 </div>
@@ -472,22 +485,22 @@
         <section class="section-dark">
             <div class="container">
                 <div class="center">
-                    <h2 class="section-title">Clinical <span class="highlight">Applications</span></h2>
-                    <p class="section-lead">BrainFS helps radiologists across diagnostic scenarios where fat signals compromise image quality.</p>
+                    <h2 class="section-title" data-i18n="fs.useCasesTitle">Clinical <span class="highlight" data-i18n="fs.useCasesHighlight">Applications</span></h2>
+                    <p class="section-lead" data-i18n="fs.useCasesDesc">BrainFS helps radiologists across diagnostic scenarios where fat signals compromise image quality.</p>
                 </div>
 
                 <div class="use-cases-grid reveal">
                     <div class="uc-card">
-                        <h3>Tumour Margin Delineation</h3>
-                        <p>Clear fat signals from peri-tumoural regions to better visualise true lesion boundaries, improving surgical planning and treatment response monitoring.</p>
+                        <h3 data-i18n="fs.uc1Title">Tumour Margin Delineation</h3>
+                        <p data-i18n="fs.uc1Desc">Clear fat signals from peri-tumoural regions to better visualise true lesion boundaries, improving surgical planning and treatment response monitoring.</p>
                     </div>
                     <div class="uc-card">
-                        <h3>Orbit &amp; Skull Base Imaging</h3>
-                        <p>Fat-rich regions around the orbits and skull base routinely obscure pathology. BrainFS computationally suppresses these signals without additional scan time.</p>
+                        <h3 data-i18n="fs.uc2Title">Orbit &amp; Skull Base Imaging</h3>
+                        <p data-i18n="fs.uc2Desc">Fat-rich regions around the orbits and skull base routinely obscure pathology. BrainFS computationally suppresses these signals without additional scan time.</p>
                     </div>
                     <div class="uc-card">
-                        <h3>Retrospective Enhancement</h3>
-                        <p>Apply fat suppression to historical scans where the original protocol did not include it &mdash; enabling longitudinal comparison with modern fat-suppressed studies.</p>
+                        <h3 data-i18n="fs.uc3Title">Retrospective Enhancement</h3>
+                        <p data-i18n="fs.uc3Desc">Apply fat suppression to historical scans where the original protocol did not include it &mdash; enabling longitudinal comparison with modern fat-suppressed studies.</p>
                     </div>
                 </div>
             </div>
@@ -496,9 +509,9 @@
         <!-- ════════════ CTA ════════════ -->
         <section class="cta-section">
             <div class="container">
-                <h2>Ready for <span class="highlight">Cleaner</span> Brain MRI?</h2>
-                <p>See BrainFS in action with your own imaging data.</p>
-                <a href="contact.html" class="btn btn-primary">Request a Demo</a>
+                <h2 data-i18n="fs.ctaTitle">Ready for <span class="highlight" data-i18n="fs.ctaHighlight">Cleaner</span> Brain MRI?</h2>
+                <p data-i18n="fs.ctaDesc">See BrainFS in action with your own imaging data.</p>
+                <a href="contact.html" class="btn btn-primary" data-i18n="fs.ctaBtn">Request a Demo</a>
             </div>
         </section>
     </main>
@@ -507,33 +520,48 @@
         <div class="container footer-content">
             <div class="footer-brand">
                 <div class="logo">
-                    <img src="Assets/Logo-White.png" alt="Pixelence" class="brand-logo">
+                    <a href="index.html">
+                        <img src="Assets/Logo-White.png" alt="Pixelence" class="brand-logo">
+                    </a>
                 </div>
-                <p>Enhanced MRI Imaging without Gadolinium.</p>
+                <p data-i18n="footer.description">Pixelence is changing brain medical imaging by eliminating Gadolinium and using 95% accurate predictions, making brain tumour treatment more affordable and safer, and saving 100 minutes of patients' and hospitals' time on every visit.</p>
+                <p class="experience-badge" data-i18n="footer.experience">56 years of combined experience</p>
             </div>
             <div class="footer-links">
-                <h4>Company</h4>
+                <h4 data-i18n="footer.company">Company</h4>
                 <ul>
-                    <li><a href="index.html#home">Home</a></li>
-                    <li><a href="index.html#team">Founders</a></li>
-                    <li><a href="index.html#focus">Focus Areas</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="index.html#home" data-i18n="footer.home">Home</a></li>
+                    <li><a href="news.html" data-i18n="footer.news">News</a></li>
+                    <li><a href="index.html#focus" data-i18n="footer.focusAreas">Focus Areas</a></li>
+                    <li><a href="contact.html" data-i18n="footer.contactUs">Contact Us</a></li>
                 </ul>
             </div>
             <div class="footer-links">
-                <h4>Products</h4>
+                <h4 data-i18n="footer.products">Products</h4>
                 <ul>
-                    <li><a href="super-resolution.html">Brain Super Resolution</a></li>
-                    <li><a href="fat-suppression.html">Brain Fat Suppression</a></li>
-                    <li><a href="enhance.html">Brain Enhance</a></li>
+                    <li><a href="super-resolution.html" data-i18n="footer.brainSuperRes">Brain Super Resolution</a></li>
+                    <li><a href="fat-suppression.html" data-i18n="footer.brainFatSup">Brain Fat Suppression</a></li>
+                    <li><a href="enhance.html" data-i18n="footer.brainEnhance">Brain Enhance</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>Copyright &copy; 2026 All Rights Reserved. Pixelence AI.</p>
+            <p data-i18n="footer.copyright">Copyright &copy; 2026 All Rights Reserved. Pixelence AI.</p>
         </div>
     </footer>
 
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent" class="cookie-banner" style="display: none;">
+        <div class="cookie-content">
+            <p data-i18n="cookie.message">We use cookies and similar technologies to enhance your browsing experience. By continuing to use this site, you consent to our use of cookies.</p>
+            <div class="cookie-actions">
+                <button id="cookie-accept" class="btn btn-primary" data-i18n="cookie.accept">Accept</button>
+                <button id="cookie-decline" class="btn btn-outline" data-i18n="cookie.decline">Decline</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="translations.js"></script>
     <script src="script.js"></script>
     <script>
     /* ──────────────────────────────────────────────

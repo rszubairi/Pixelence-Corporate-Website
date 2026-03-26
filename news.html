@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-page="news">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -237,14 +237,27 @@
             </div>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="index.html#home">Home</a></li>
-                    <li><a href="index.html#technology">Technology</a></li>
-                    <li><a href="index.html#focus">Focus Areas</a></li>
-                    <li><a href="news.html">News</a></li>
+                    <li><a href="index.html#home" data-i18n="nav.home">Home</a></li>
+                    <li><a href="index.html#technology" data-i18n="nav.technology">Technology</a></li>
+                    <li><a href="index.html#focus" data-i18n="nav.focusAreas">Focus Areas</a></li>
+                    <li><a href="news.html" data-i18n="nav.news">News</a></li>
                 </ul>
             </nav>
             <div class="nav-actions">
-                <a href="contact.html" class="btn btn-outline">Contact Us</a>
+                <div class="lang-switcher">
+                    <button class="lang-btn" aria-label="Select language">
+                        <span id="current-lang-flag">EN</span>
+                        <svg width="10" height="6" viewBox="0 0 10 6"><polyline points="1 1 5 5 9 1" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                    </button>
+                    <div class="lang-dropdown">
+                        <button class="lang-option active" data-lang="en">EN English</button>
+                        <button class="lang-option" data-lang="ko">KO 한국어</button>
+                        <button class="lang-option" data-lang="ja">JA 日本語</button>
+                        <button class="lang-option" data-lang="de">DE Deutsch</button>
+                        <button class="lang-option" data-lang="fr">FR Français</button>
+                    </div>
+                </div>
+                <a href="contact.html" class="btn btn-outline" data-i18n="nav.contact">Contact Us</a>
             </div>
             <div class="mobile-menu-btn">
                 <span></span>
@@ -258,8 +271,8 @@
         <!-- ════════════ HERO ════════════ -->
         <section class="news-hero">
             <div class="container">
-                <h1>Pixelence <span class="highlight">News</span></h1>
-                <p>Milestones, partnerships, and breakthroughs on our mission to make brain MRI safer and more accessible.</p>
+                <h1><span data-i18n="news.heroTitle">Pixelence</span> <span class="highlight" data-i18n="news.heroHighlight">News</span></h1>
+                <p data-i18n="news.heroDesc">Milestones, partnerships, and breakthroughs on our mission to make brain MRI safer and more accessible.</p>
             </div>
         </section>
 
@@ -280,12 +293,12 @@
                         <div class="news-card">
                             <div class="news-meta">
                                 <span class="news-date">March 11, 2026</span>
-                                <span class="news-tag">Intellectual Property</span>
+                                <span class="news-tag" data-i18n="news.tagIP">Intellectual Property</span>
                             </div>
-                            <h3>Patent Filed for Gadolinium-Free Contrast MRI Synthesis</h3>
-                            <p>Pixelence has officially filed a patent for an AI system that generates brain contrast-enhanced MRI images without gadolinium contrast agents. The technology combines multi-sequence non-contrast MRI, deep pathology segmentation, and conditional generative models to create synthetic contrast &mdash; prioritising accuracy in pathology-positive regions.</p>
-                            <p>This milestone brings us closer to making neuro-oncology imaging safer, faster, and more accessible for patients and hospitals where contrast administration poses risks or logistical challenges.</p>
-                            <a href="https://www.linkedin.com/posts/pixelence_today-marks-a-big-milestone-for-pixelence-activity-7437505374393372673-u4Zx/" target="_blank" class="read-more">Read on LinkedIn &rarr;</a>
+                            <h3 data-i18n="news.patentTitle">Patent Filed for Gadolinium-Free Contrast MRI Synthesis</h3>
+                            <p data-i18n="news.patentDesc1">Pixelence has officially filed a patent for an AI system that generates brain contrast-enhanced MRI images without gadolinium contrast agents. The technology combines multi-sequence non-contrast MRI, deep pathology segmentation, and conditional generative models to create synthetic contrast &mdash; prioritising accuracy in pathology-positive regions.</p>
+                            <p data-i18n="news.patentDesc2">This milestone brings us closer to making neuro-oncology imaging safer, faster, and more accessible for patients and hospitals where contrast administration poses risks or logistical challenges.</p>
+                            <a href="https://www.linkedin.com/posts/pixelence_today-marks-a-big-milestone-for-pixelence-activity-7437505374393372673-u4Zx/" target="_blank" class="read-more" data-i18n="news.readLinkedIn">Read on LinkedIn &rarr;</a>
                         </div>
                     </div>
 
@@ -295,11 +308,11 @@
                         <div class="news-card">
                             <div class="news-meta">
                                 <span class="news-date">March 10, 2026</span>
-                                <span class="news-tag">Competition</span>
+                                <span class="news-tag" data-i18n="news.tagCompetition">Competition</span>
                             </div>
-                            <h3>Selected to Pitch at SelectUSA Tech &mdash; Malaysia Session</h3>
-                            <p>Pixelence was selected as one of six Malaysian startups to pitch at the SelectUSA Tech virtual session, presenting our non-invasive brain MRI contrast enhancement solution to an international panel of judges. The winner receives a complimentary ticket to the SelectUSA Investment Summit in Maryland, USA &mdash; the highest-profile US event for promoting foreign direct investment.</p>
-                            <a href="https://www.linkedin.com/posts/pixelence_excited-to-share-that-pixelence-has-been-activity-7435126965549965312-usHW/" target="_blank" class="read-more">Read on LinkedIn &rarr;</a>
+                            <h3 data-i18n="news.selectUSATitle">Selected to Pitch at SelectUSA Tech &mdash; Malaysia Session</h3>
+                            <p data-i18n="news.selectUSADesc">Pixelence was selected as one of six Malaysian startups to pitch at the SelectUSA Tech virtual session, presenting our non-invasive brain MRI contrast enhancement solution to an international panel of judges. The winner receives a complimentary ticket to the SelectUSA Investment Summit in Maryland, USA &mdash; the highest-profile US event for promoting foreign direct investment.</p>
+                            <a href="https://www.linkedin.com/posts/pixelence_excited-to-share-that-pixelence-has-been-activity-7435126965549965312-usHW/" target="_blank" class="read-more" data-i18n="news.readLinkedIn">Read on LinkedIn &rarr;</a>
                         </div>
                     </div>
 
@@ -309,12 +322,12 @@
                         <div class="news-card">
                             <div class="news-meta">
                                 <span class="news-date">March 5, 2026</span>
-                                <span class="news-tag">Accelerator</span>
+                                <span class="news-tag" data-i18n="news.tagAccelerator">Accelerator</span>
                             </div>
-                            <h3>Top 3 at NEXEA Selangor Life Sciences Accelerator</h3>
-                            <p>Pixelence was selected as a Top 3 startup in the NEXEA Selangor Life Sciences Accelerator finals, pitching alongside nine other life sciences and digital health teams. Alongside fellow winners BioLoop and PlusVibes, Pixelence received RM 20,000 in funding to further advance our AI-powered medical imaging solutions.</p>
-                            <p>Special thanks to mentors Ben Lim, Dr. Inky, and Vykintas Mineikis, and to NEXEA and Invest Selangor Berhad for their continued support of Malaysia's life sciences ecosystem.</p>
-                            <a href="https://www.linkedin.com/posts/rzubairi_honoured-to-share-that-pixelence-has-been-activity-7435111863161614336-Zy0c/" target="_blank" class="read-more">Read on LinkedIn &rarr;</a>
+                            <h3 data-i18n="news.nexeaTitle">Top 3 at NEXEA Selangor Life Sciences Accelerator</h3>
+                            <p data-i18n="news.nexeaDesc1">Pixelence was selected as a Top 3 startup in the NEXEA Selangor Life Sciences Accelerator finals, pitching alongside nine other life sciences and digital health teams. Alongside fellow winners BioLoop and PlusVibes, Pixelence received RM 20,000 in funding to further advance our AI-powered medical imaging solutions.</p>
+                            <p data-i18n="news.nexeaDesc2">Special thanks to mentors Ben Lim, Dr. Inky, and Vykintas Mineikis, and to NEXEA and Invest Selangor Berhad for their continued support of Malaysia's life sciences ecosystem.</p>
+                            <a href="https://www.linkedin.com/posts/rzubairi_honoured-to-share-that-pixelence-has-been-activity-7435111863161614336-Zy0c/" target="_blank" class="read-more" data-i18n="news.readLinkedIn">Read on LinkedIn &rarr;</a>
                         </div>
                     </div>
 
@@ -324,11 +337,11 @@
                         <div class="news-card">
                             <div class="news-meta">
                                 <span class="news-date">January 2026</span>
-                                <span class="news-tag">Media</span>
+                                <span class="news-tag" data-i18n="news.tagMedia">Media</span>
                             </div>
-                            <h3>Featured on the Ctrl Alt Deliver Podcast</h3>
-                            <p>Our founder Raheel Zubairi joined host Yasin on the Ctrl Alt Deliver podcast to discuss how AI transitions from pilot to production in healthcare, why AI initiatives stall before reaching real-world deployment, and the unique challenges that arise when modern AI systems meet legacy hospital environments.</p>
-                            <a href="https://www.linkedin.com/posts/hassanbasharat_yasins-back-behind-the-mic-this-month-for-activity-7422889777802215424-IAAt/" target="_blank" class="read-more">Read on LinkedIn &rarr;</a>
+                            <h3 data-i18n="news.podcastTitle">Featured on the Ctrl Alt Deliver Podcast</h3>
+                            <p data-i18n="news.podcastDesc">Our founder Raheel Zubairi joined host Yasin on the Ctrl Alt Deliver podcast to discuss how AI transitions from pilot to production in healthcare, why AI initiatives stall before reaching real-world deployment, and the unique challenges that arise when modern AI systems meet legacy hospital environments.</p>
+                            <a href="https://www.linkedin.com/posts/hassanbasharat_yasins-back-behind-the-mic-this-month-for-activity-7422889777802215424-IAAt/" target="_blank" class="read-more" data-i18n="news.readLinkedIn">Read on LinkedIn &rarr;</a>
                         </div>
                     </div>
 
@@ -344,12 +357,12 @@
                         <div class="news-card">
                             <div class="news-meta">
                                 <span class="news-date">October 8, 2025</span>
-                                <span class="news-tag">Accelerator</span>
+                                <span class="news-tag" data-i18n="news.tagAccelerator">Accelerator</span>
                             </div>
-                            <h3>Top 6 at Selangor Deep Tech Xccelerator (Deep-X) Final Demo Day</h3>
-                            <p>Pixelence earned a Top 6 position at the Deep-X Final Demo Day held at KLCC Hall 6, Kuala Lumpur, competing against 12 deep tech startups. Judges from Endeavour, Gobi Partners, Artem Ventures, Cradle, and MDEC evaluated the pitches.</p>
-                            <p>As a result, Pixelence was selected to represent Malaysia on an industry trip to South Korea (October 19&ndash;26, 2025) to advance AI-powered medical imaging within the global health tech ecosystem.</p>
-                            <a href="https://www.linkedin.com/posts/rzubairi_deepx-selangoraccelerator-pixelence-activity-7381635423472857088-08SG/" target="_blank" class="read-more">Read on LinkedIn &rarr;</a>
+                            <h3 data-i18n="news.deepXTitle">Top 6 at Selangor Deep Tech Xccelerator (Deep-X) Final Demo Day</h3>
+                            <p data-i18n="news.deepXDesc1">Pixelence earned a Top 6 position at the Deep-X Final Demo Day held at KLCC Hall 6, Kuala Lumpur, competing against 12 deep tech startups. Judges from Endeavour, Gobi Partners, Artem Ventures, Cradle, and MDEC evaluated the pitches.</p>
+                            <p data-i18n="news.deepXDesc2">As a result, Pixelence was selected to represent Malaysia on an industry trip to South Korea (October 19&ndash;26, 2025) to advance AI-powered medical imaging within the global health tech ecosystem.</p>
+                            <a href="https://www.linkedin.com/posts/rzubairi_deepx-selangoraccelerator-pixelence-activity-7381635423472857088-08SG/" target="_blank" class="read-more" data-i18n="news.readLinkedIn">Read on LinkedIn &rarr;</a>
                         </div>
                     </div>
 
@@ -365,11 +378,11 @@
                         <div class="news-card">
                             <div class="news-meta">
                                 <span class="news-date">June 2024</span>
-                                <span class="news-tag">Product</span>
+                                <span class="news-tag" data-i18n="news.tagProduct">Product</span>
                             </div>
-                            <h3>BrainEnhance Technology Officially Introduced</h3>
-                            <p>Pixelence publicly introduced BrainEnhance &mdash; our AI software that generates synthetic contrast-enhanced MRI scans from native non-contrast sequences using a generative U-Net architecture with attention blocks. The technology reduces imaging costs by 30%, enhances patient safety by eliminating gadolinium contrast agent risks, and enables more frequent monitoring for patients needing regular scans.</p>
-                            <a href="https://www.linkedin.com/posts/pixelence_pixelence-brochure-artificial-ai-enhancement-activity-7211691536474857472-hnB0/" target="_blank" class="read-more">Read on LinkedIn &rarr;</a>
+                            <h3 data-i18n="news.brainEnhanceTitle">BrainEnhance Technology Officially Introduced</h3>
+                            <p data-i18n="news.brainEnhanceDesc">Pixelence publicly introduced BrainEnhance &mdash; our AI software that generates synthetic contrast-enhanced MRI scans from native non-contrast sequences using a generative U-Net architecture with attention blocks. The technology reduces imaging costs by 30%, enhances patient safety by eliminating gadolinium contrast agent risks, and enables more frequent monitoring for patients needing regular scans.</p>
+                            <a href="https://www.linkedin.com/posts/pixelence_pixelence-brochure-artificial-ai-enhancement-activity-7211691536474857472-hnB0/" target="_blank" class="read-more" data-i18n="news.readLinkedIn">Read on LinkedIn &rarr;</a>
                         </div>
                     </div>
 
@@ -380,9 +393,9 @@
         <!-- ════════════ CTA ════════════ -->
         <section class="cta-section">
             <div class="container">
-                <h2>Stay <span class="highlight">Connected</span></h2>
-                <p>Follow our journey as we transform brain MRI imaging.</p>
-                <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+                <h2><span data-i18n="news.ctaTitle">Stay</span> <span class="highlight" data-i18n="news.ctaHighlight">Connected</span></h2>
+                <p data-i18n="news.ctaDesc">Follow our journey as we transform brain MRI imaging.</p>
+                <a href="contact.html" class="btn btn-primary" data-i18n="news.ctaBtn">Get in Touch</a>
             </div>
         </section>
     </main>
@@ -395,31 +408,44 @@
                         <img src="Assets/Logo-White.png" alt="Pixelence" class="brand-logo">
                     </a>
                 </div>
-                <p>Pixelence is changing brain medical imaging by eliminating Gadolinium and using 95% accurate predictions, making brain tumour treatment more affordable and safer, and saving 100 minutes of patients' and hospitals' time on every visit.</p>
-                <p class="experience-badge">56 years of combined experience</p>
+                <p data-i18n="footer.description">Pixelence is changing brain medical imaging by eliminating Gadolinium and using 95% accurate predictions, making brain tumour treatment more affordable and safer, and saving 100 minutes of patients' and hospitals' time on every visit.</p>
+                <p class="experience-badge" data-i18n="footer.experience">56 years of combined experience</p>
             </div>
             <div class="footer-links">
-                <h4>Company</h4>
+                <h4 data-i18n="footer.company">Company</h4>
                 <ul>
-                    <li><a href="index.html#home">Home</a></li>
-                    <li><a href="news.html">News</a></li>
-                    <li><a href="index.html#focus">Focus Areas</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="index.html#home" data-i18n="footer.home">Home</a></li>
+                    <li><a href="news.html" data-i18n="footer.news">News</a></li>
+                    <li><a href="index.html#focus" data-i18n="footer.focusAreas">Focus Areas</a></li>
+                    <li><a href="contact.html" data-i18n="footer.contactUs">Contact Us</a></li>
                 </ul>
             </div>
             <div class="footer-links">
-                <h4>Products</h4>
+                <h4 data-i18n="footer.products">Products</h4>
                 <ul>
-                    <li><a href="super-resolution.html">Brain Super Resolution</a></li>
-                    <li><a href="fat-suppression.html">Brain Fat Suppression</a></li>
-                    <li><a href="enhance.html">Brain Enhance</a></li>
+                    <li><a href="super-resolution.html" data-i18n="footer.brainSuperRes">Brain Super Resolution</a></li>
+                    <li><a href="fat-suppression.html" data-i18n="footer.brainFatSup">Brain Fat Suppression</a></li>
+                    <li><a href="enhance.html" data-i18n="footer.brainEnhance">Brain Enhance</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>Copyright &copy; 2026 All Rights Reserved. Pixelence AI.</p>
+            <p data-i18n="footer.copyright">Copyright &copy; 2026 All Rights Reserved. Pixelence AI.</p>
         </div>
     </footer>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent" class="cookie-banner" style="display: none;">
+        <div class="cookie-content">
+            <p data-i18n="cookie.message">We use cookies and similar technologies to enhance your browsing experience. By continuing to use this site, you consent to our use of cookies.</p>
+            <div class="cookie-actions">
+                <button id="cookie-accept" class="btn btn-primary" data-i18n="cookie.accept">Accept</button>
+                <button id="cookie-decline" class="btn btn-outline" data-i18n="cookie.decline">Decline</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="translations.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-page="index">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,14 +18,27 @@
             </div>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#technology">Technology</a></li>
-                    <li><a href="#focus">Focus Areas</a></li>
-                    <li><a href="news.html">News</a></li>
+                    <li><a href="#home" data-i18n="nav.home">Home</a></li>
+                    <li><a href="#technology" data-i18n="nav.technology">Technology</a></li>
+                    <li><a href="#focus" data-i18n="nav.focusAreas">Focus Areas</a></li>
+                    <li><a href="news.html" data-i18n="nav.news">News</a></li>
                 </ul>
             </nav>
             <div class="nav-actions">
-                <a href="contact.html" class="btn btn-outline">Contact Us</a>
+                <div class="lang-switcher">
+                    <button class="lang-btn" aria-label="Select language">
+                        <span id="current-lang-flag">EN</span>
+                        <svg width="10" height="6" viewBox="0 0 10 6"><polyline points="1 1 5 5 9 1" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                    </button>
+                    <div class="lang-dropdown">
+                        <button class="lang-option active" data-lang="en">EN English</button>
+                        <button class="lang-option" data-lang="ko">KO 한국어</button>
+                        <button class="lang-option" data-lang="ja">JA 日本語</button>
+                        <button class="lang-option" data-lang="de">DE Deutsch</button>
+                        <button class="lang-option" data-lang="fr">FR Français</button>
+                    </div>
+                </div>
+                <a href="contact.html" class="btn btn-outline" data-i18n="nav.contact">Contact Us</a>
             </div>
             <div class="mobile-menu-btn">
                 <span></span>
@@ -40,11 +53,11 @@
             <div class="hero-background"></div>
             <div class="container hero-content">
                 <div class="hero-text">
-                    <h1>Enhanced MRI Imaging <span class="highlight">without Gadolinium</span></h1>
-                    <p>Redefining brain medical imaging precision. Our AI-driven technology eliminates Gadolinium dyes with 95% accuracy, making brain tumor treatment safer, more affordable, and saving 100 minutes per patient visit.</p>
+                    <h1><span data-i18n="index.heroTitle">Enhanced MRI Imaging</span> <span class="highlight" data-i18n="index.heroHighlight">without Gadolinium</span></h1>
+                    <p data-i18n="index.heroDesc">Redefining brain medical imaging precision. Our AI-driven technology eliminates Gadolinium dyes with 95% accuracy, making brain tumor treatment safer, more affordable, and saving 100 minutes per patient visit.</p>
                     <div class="hero-buttons">
-                        <a href="#technology" class="btn btn-primary">Discover the Innovation</a>
-                        <a href="#metrics" class="btn btn-secondary">View Impact</a>
+                        <a href="#technology" class="btn btn-primary" data-i18n="index.btnDiscover">Discover the Innovation</a>
+                        <a href="#metrics" class="btn btn-secondary" data-i18n="index.btnImpact">View Impact</a>
                     </div>
                 </div>
                 <div class="hero-visual">
@@ -77,7 +90,7 @@
 
                         <!-- Output Layer -->
                         <div class="dicom-layer layer-output">
-                            <span class="layer-label highlight">Synthetic MRI Output</span>
+                            <span class="layer-label highlight" data-i18n="index.layerOutput">Synthetic MRI Output</span>
                             <div class="brain-illustration final-brain"></div>
                             <div class="tumor-highlight"></div>
                         </div>
@@ -90,19 +103,19 @@
             <div class="container metrics-grid">
                 <div class="metric-card reveal">
                     <h2 class="counter" data-target="129000">0</h2>
-                    <p>Cases Processed</p>
+                    <p data-i18n="index.metricCases">Cases Processed</p>
                 </div>
                 <div class="metric-card reveal reveal-delay-1">
                     <h2 class="counter" data-target="156">0</h2>
-                    <p>Clinical Trial Cases</p>
+                    <p data-i18n="index.metricTrials">Clinical Trial Cases</p>
                 </div>
                 <div class="metric-card reveal reveal-delay-2">
                     <h2 class="counter" data-target="2">0</h2>
-                    <p>Registered Patents</p>
+                    <p data-i18n="index.metricPatents">Registered Patents</p>
                 </div>
                 <div class="metric-card reveal reveal-delay-3">
                     <h2 class="counter" data-target="3">0</h2>
-                    <p>Hospitals Onboard</p>
+                    <p data-i18n="index.metricHospitals">Hospitals Onboard</p>
                 </div>
             </div>
         </section>
@@ -110,35 +123,35 @@
         <section id="technology" class="technology">
             <div class="container tech-content">
                 <div class="tech-text reveal">
-                    <h2>A Breakthrough in <br/>Brain Medical Imaging</h2>
-                    <p>Pixelence is disrupting the way brain medical imaging is done by eliminating the use of Gadolinium using prediction with 95% accuracy from the process. This breakthrough makes brain tumor treatment more affordable and safer.</p>
+                    <h2><span data-i18n="index.techTitle">A Breakthrough in</span> <br/><span data-i18n="index.techTitleBr">Brain Medical Imaging</span></h2>
+                    <p data-i18n="index.techDesc">Pixelence is disrupting the way brain medical imaging is done by eliminating the use of Gadolinium using prediction with 95% accuracy from the process. This breakthrough makes brain tumor treatment more affordable and safer.</p>
                     <ul class="tech-features">
                         <li>
                             <div class="feature-icon"></div>
                             <div class="feature-details">
-                                <h3>No Gadolinium Required</h3>
-                                <p>Eliminates the risks associated with heavy metal contrast dyes.</p>
+                                <h3 data-i18n="index.featNoGad">No Gadolinium Required</h3>
+                                <p data-i18n="index.featNoGadDesc">Eliminates the risks associated with heavy metal contrast dyes.</p>
                             </div>
                         </li>
                         <li>
                             <div class="feature-icon"></div>
                             <div class="feature-details">
-                                <h3>Time Efficient</h3>
-                                <p>Saves up to 100 minutes of patients' and hospitals' time on every single visit.</p>
+                                <h3 data-i18n="index.featTime">Time Efficient</h3>
+                                <p data-i18n="index.featTimeDesc">Saves up to 100 minutes of patients' and hospitals' time on every single visit.</p>
                             </div>
                         </li>
                         <li>
                             <div class="feature-icon"></div>
                             <div class="feature-details">
-                                <h3>High Accuracy</h3>
-                                <p>Synthetic generation with over 95% predicted accuracy for critical diagnoses.</p>
+                                <h3 data-i18n="index.featAccuracy">High Accuracy</h3>
+                                <p data-i18n="index.featAccuracyDesc">Synthetic generation with over 95% predicted accuracy for critical diagnoses.</p>
                             </div>
                         </li>
                     </ul>
                     <div class="tech-products-links">
-                        <a href="super-resolution.html" class="product-pill">Brain Super Resolution &rarr;</a>
-                        <a href="fat-suppression.html" class="product-pill">Brain Fat Suppression &rarr;</a>
-                        <a href="enhance.html" class="product-pill">Brain Enhance &rarr;</a>
+                        <a href="super-resolution.html" class="product-pill" data-i18n="index.productSR">Brain Super Resolution &rarr;</a>
+                        <a href="fat-suppression.html" class="product-pill" data-i18n="index.productFS">Brain Fat Suppression &rarr;</a>
+                        <a href="enhance.html" class="product-pill" data-i18n="index.productEnhance">Brain Enhance &rarr;</a>
                     </div>
                 </div>
                 <div class="tech-image reveal">
@@ -154,29 +167,29 @@
         <section id="focus" class="focus-areas">
             <div class="container reveal">
                 <div class="section-header center">
-                    <h2>Our Focus Areas</h2>
-                    <p>Targeted diagnostics for the most critical brain medical conditions.</p>
+                    <h2 data-i18n="index.focusTitle">Our Focus Areas</h2>
+                    <p data-i18n="index.focusDesc">Targeted diagnostics for the most critical brain medical conditions.</p>
                 </div>
                 <div class="cards-grid">
                     <div class="focus-card">
                         <div class="card-image tumour"></div>
                         <div class="card-content">
-                            <h3>Brain Tumours</h3>
-                            <p>Advanced synthetic imaging for early tumor detection and precise boundary rendering, completely eliminating the need for invasive Gadolinium contrast dyes.</p>
+                            <h3 data-i18n="index.focusTumours">Brain Tumours</h3>
+                            <p data-i18n="index.focusTumoursDesc">Advanced synthetic imaging for early tumor detection and precise boundary rendering, completely eliminating the need for invasive Gadolinium contrast dyes.</p>
                         </div>
                     </div>
                     <div class="focus-card">
                         <div class="card-image stroke"></div>
                         <div class="card-content">
-                            <h3>Strokes</h3>
-                            <p>High-contrast, precision scans isolating ischemic and hemorrhagic stroke zones instantly, providing necessary critical clarity for rapid, life-saving emergency interventions.</p>
+                            <h3 data-i18n="index.focusStrokes">Strokes</h3>
+                            <p data-i18n="index.focusStrokesDesc">High-contrast, precision scans isolating ischemic and hemorrhagic stroke zones instantly, providing necessary critical clarity for rapid, life-saving emergency interventions.</p>
                         </div>
                     </div>
                     <div class="focus-card">
                         <div class="card-image trauma"></div>
                         <div class="card-content">
-                            <h3>Trauma Cases</h3>
-                            <p>Extremely fast predictive reconstruction of brain matter and tissue mapping, delivering crisp diagnostic imaging for severe traumatic brain injuries right at the point of care.</p>
+                            <h3 data-i18n="index.focusTrauma">Trauma Cases</h3>
+                            <p data-i18n="index.focusTraumaDesc">Extremely fast predictive reconstruction of brain matter and tissue mapping, delivering crisp diagnostic imaging for severe traumatic brain injuries right at the point of care.</p>
                         </div>
                     </div>
                 </div>
@@ -186,8 +199,8 @@
         <section id="process" class="process-workflow">
             <div class="container reveal">
                 <div class="section-header center">
-                    <h2>How Pixelence Works</h2>
-                    <p>A seamless integration into the clinical workflow, from capture to final report.</p>
+                    <h2 data-i18n="index.workflowTitle">How Pixelence Works</h2>
+                    <p data-i18n="index.workflowDesc">A seamless integration into the clinical workflow, from capture to final report.</p>
                 </div>
                 <div class="animated-workflow">
                     <svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" class="workflow-svg">
@@ -218,7 +231,7 @@
                         <circle cx="0" cy="0" r="6" fill="#FFFFFF" filter="url(#glow)">
                             <animateMotion dur="2.5s" repeatCount="indefinite" path="M 200 150 C 350 150, 400 150, 450 150" />
                         </circle>
-                        
+
                         <circle cx="0" cy="0" r="6" fill="#FF5E85" filter="url(#glow)">
                             <animateMotion dur="2.5s" repeatCount="indefinite" path="M 550 150 C 600 150, 650 150, 800 150" begin="1.25s"/>
                         </circle>
@@ -231,8 +244,8 @@
                             <circle cx="50" cy="50" r="10" fill="none" stroke="#9D8DF1" stroke-width="2"/>
                             <!-- Patient bed -->
                             <path d="M 50 60 L 80 60" stroke="#9D8DF1" stroke-width="2"/>
-                            <text x="50" y="125" text-anchor="middle" fill="#FFFFFF" font-family="Montserrat, sans-serif" font-weight="600" font-size="14">1. CAPTURE</text>
-                            <text x="50" y="145" text-anchor="middle" fill="#B0B0C4" font-family="Montserrat, sans-serif" font-weight="400" font-size="10">No Gadolinium</text>
+                            <text x="50" y="125" text-anchor="middle" fill="#FFFFFF" font-family="Montserrat, sans-serif" font-weight="600" font-size="14" data-i18n="index.svgCapture">1. CAPTURE</text>
+                            <text x="50" y="145" text-anchor="middle" fill="#B0B0C4" font-family="Montserrat, sans-serif" font-weight="400" font-size="10" data-i18n="index.svgNoGad">No Gadolinium</text>
                         </g>
 
                         <!-- Node 2: Enhance (AI Server) -->
@@ -244,8 +257,8 @@
                             <line x1="30" y1="75" x2="70" y2="75" stroke="#9D8DF1" stroke-width="4" stroke-linecap="round" class="ai-blink-3"/>
                             <!-- AI Brain -->
                             <path d="M 50 120 C 40 120, 35 110, 40 100 C 45 90, 55 90, 60 100 C 65 110, 60 120, 50 120 Z" fill="none" stroke="#FF5E85" stroke-width="2" class="ai-brain-pulse"/>
-                            <text x="50" y="185" text-anchor="middle" fill="#FFFFFF" font-family="Montserrat, sans-serif" font-weight="700" font-size="16">2. PIXELENCE AI</text>
-                            <text x="50" y="205" text-anchor="middle" fill="#FF5E85" font-family="Montserrat, sans-serif" font-weight="600" font-size="10">SYNTHETIC ENHANCEMENT</text>
+                            <text x="50" y="185" text-anchor="middle" fill="#FFFFFF" font-family="Montserrat, sans-serif" font-weight="700" font-size="16" data-i18n="index.svgAI">2. PIXELENCE AI</text>
+                            <text x="50" y="205" text-anchor="middle" fill="#FF5E85" font-family="Montserrat, sans-serif" font-weight="600" font-size="10" data-i18n="index.svgSynthetic">SYNTHETIC ENHANCEMENT</text>
                         </g>
 
                         <!-- Node 3: Review (Radiologist/Monitor) -->
@@ -257,8 +270,8 @@
                             <path d="M 40 65 L 60 65 L 55 75 L 45 75 Z" fill="#9D8DF1"/>
                             <!-- Tumor finding on screen -->
                             <circle cx="50" cy="47" r="4" fill="#FF5E85" filter="url(#glow)" class="diagnostic-pulse"/>
-                            <text x="50" y="125" text-anchor="middle" fill="#FFFFFF" font-family="Montserrat, sans-serif" font-weight="600" font-size="14">3. REVIEW</text>
-                            <text x="50" y="145" text-anchor="middle" fill="#B0B0C4" font-family="Montserrat, sans-serif" font-weight="400" font-size="10">High Precision Diagnoses</text>
+                            <text x="50" y="125" text-anchor="middle" fill="#FFFFFF" font-family="Montserrat, sans-serif" font-weight="600" font-size="14" data-i18n="index.svgReview">3. REVIEW</text>
+                            <text x="50" y="145" text-anchor="middle" fill="#B0B0C4" font-family="Montserrat, sans-serif" font-weight="400" font-size="10" data-i18n="index.svgPrecision">High Precision Diagnoses</text>
                         </g>
                     </svg>
                 </div>
@@ -273,9 +286,9 @@
                         <span class="cci-text">Clinical Cancer Informatics</span>
                     </div>
                     <div class="pub-content">
-                        <h3>Our Featured Peer-Reviewed Publication</h3>
-                        <p><strong>"General adversarial neural networks may generate diagnostic quality contrast-enhanced structural MRI from structural non-contrast T1."</strong> This breakthrough study demonstrates that our AI core can be applied retrospectively across varied clinical cases, validating the generation of safe, Gadolinium-free medical imaging without loss of diagnostic precision.</p>
-                        <a href="https://ascopubs.org/doi/10.1200/CCI.23.00266#:~:text=General%20adversarial%20neural%20networks%20may,it%20can%20be%20applied%20retrospectively" target="_blank" rel="noopener noreferrer" class="btn btn-outline pub-btn">Read Full Article &rarr;</a>
+                        <h3 data-i18n="index.pubTitle">Our Featured Peer-Reviewed Publication</h3>
+                        <p data-i18n-html="index.pubDesc"><strong>"General adversarial neural networks may generate diagnostic quality contrast-enhanced structural MRI from structural non-contrast T1."</strong> This breakthrough study demonstrates that our AI core can be applied retrospectively across varied clinical cases, validating the generation of safe, Gadolinium-free medical imaging without loss of diagnostic precision.</p>
+                        <a href="https://ascopubs.org/doi/10.1200/CCI.23.00266#:~:text=General%20adversarial%20neural%20networks%20may,it%20can%20be%20applied%20retrospectively" target="_blank" rel="noopener noreferrer" class="btn btn-outline pub-btn" data-i18n="index.pubBtn">Read Full Article &rarr;</a>
                     </div>
                 </div>
             </div>
@@ -283,11 +296,11 @@
 
         <section id="cta" class="cta">
             <div class="container cta-container reveal">
-                <h2>Join the Future of Medical Imaging</h2>
-                <p>Sign up to get the latest updates on our European Incubation and Development Centre activities.</p>
+                <h2 data-i18n="index.ctaTitle">Join the Future of Medical Imaging</h2>
+                <p data-i18n="index.ctaDesc">Sign up to get the latest updates on our European Incubation and Development Centre activities.</p>
                 <form class="cta-form">
-                    <input type="email" placeholder="Enter your email address" required>
-                    <button type="submit" class="btn btn-primary">Subscribe Now</button>
+                    <input type="email" placeholder="Enter your email address" data-i18n-placeholder="index.ctaPlaceholder" required>
+                    <button type="submit" class="btn btn-primary" data-i18n="index.ctaBtn">Subscribe Now</button>
                 </form>
             </div>
         </section>
@@ -301,31 +314,44 @@
                         <img src="Assets/Logo-White.png" alt="Pixelence" class="brand-logo">
                     </a>
                 </div>
-                <p>Pixelence is changing brain medical imaging by eliminating Gadolinium and using 95% accurate predictions, making brain tumour treatment more affordable and safer, and saving 100 minutes of patients' and hospitals' time on every visit.</p>
-                <p class="experience-badge">56 years of combined experience</p>
+                <p data-i18n="footer.description">Pixelence is changing brain medical imaging by eliminating Gadolinium and using 95% accurate predictions, making brain tumour treatment more affordable and safer, and saving 100 minutes of patients' and hospitals' time on every visit.</p>
+                <p class="experience-badge" data-i18n="footer.experience">56 years of combined experience</p>
             </div>
             <div class="footer-links">
-                <h4>Company</h4>
+                <h4 data-i18n="footer.company">Company</h4>
                 <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="news.html">News</a></li>
-                    <li><a href="#focus">Focus Areas</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#home" data-i18n="footer.home">Home</a></li>
+                    <li><a href="news.html" data-i18n="footer.news">News</a></li>
+                    <li><a href="#focus" data-i18n="footer.focusAreas">Focus Areas</a></li>
+                    <li><a href="contact.html" data-i18n="footer.contactUs">Contact Us</a></li>
                 </ul>
             </div>
             <div class="footer-links">
-                <h4>Products</h4>
+                <h4 data-i18n="footer.products">Products</h4>
                 <ul>
-                    <li><a href="super-resolution.html">Brain Super Resolution</a></li>
-                    <li><a href="fat-suppression.html">Brain Fat Suppression</a></li>
-                    <li><a href="enhance.html">Brain Enhance</a></li>
+                    <li><a href="super-resolution.html" data-i18n="footer.brainSuperRes">Brain Super Resolution</a></li>
+                    <li><a href="fat-suppression.html" data-i18n="footer.brainFatSup">Brain Fat Suppression</a></li>
+                    <li><a href="enhance.html" data-i18n="footer.brainEnhance">Brain Enhance</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>Copyright &copy; 2026 All Rights Reserved. Pixelence AI.</p>
+            <p data-i18n="footer.copyright">Copyright &copy; 2026 All Rights Reserved. Pixelence AI.</p>
         </div>
     </footer>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent" class="cookie-banner" style="display: none;">
+        <div class="cookie-content">
+            <p data-i18n="cookie.message">We use cookies and similar technologies to enhance your browsing experience. By continuing to use this site, you consent to our use of cookies.</p>
+            <div class="cookie-actions">
+                <button id="cookie-accept" class="btn btn-primary" data-i18n="cookie.accept">Accept</button>
+                <button id="cookie-decline" class="btn btn-outline" data-i18n="cookie.decline">Decline</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="translations.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

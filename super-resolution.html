@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-page="sr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -240,13 +240,26 @@
             </div>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="index.html#home">Home</a></li>
-                    <li><a href="index.html#technology">Technology</a></li>
-                    <li><a href="index.html#focus">Focus Areas</a></li>
+                    <li><a href="index.html#home" data-i18n="nav.home">Home</a></li>
+                    <li><a href="index.html#technology" data-i18n="nav.technology">Technology</a></li>
+                    <li><a href="index.html#focus" data-i18n="nav.focusAreas">Focus Areas</a></li>
                 </ul>
             </nav>
             <div class="nav-actions">
-                <a href="contact.html" class="btn btn-outline">Contact Us</a>
+                <div class="lang-switcher">
+                    <button class="lang-btn" aria-label="Select language">
+                        <span id="current-lang-flag">EN</span>
+                        <svg width="10" height="6" viewBox="0 0 10 6"><polyline points="1 1 5 5 9 1" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                    </button>
+                    <div class="lang-dropdown">
+                        <button class="lang-option active" data-lang="en">EN English</button>
+                        <button class="lang-option" data-lang="ko">KO 한국어</button>
+                        <button class="lang-option" data-lang="ja">JA 日本語</button>
+                        <button class="lang-option" data-lang="de">DE Deutsch</button>
+                        <button class="lang-option" data-lang="fr">FR Français</button>
+                    </div>
+                </div>
+                <a href="contact.html" class="btn btn-outline" data-i18n="nav.contact">Contact Us</a>
             </div>
             <div class="mobile-menu-btn">
                 <span></span>
@@ -261,11 +274,11 @@
         <section class="product-hero">
             <div class="container hero-split">
                 <div class="hero-left">
-                    <h1>Brain <span class="highlight">Super Resolution</span></h1>
-                    <p class="hero-subtitle">A deep learning network that upscales, denoises, and enhances brain MRI scans up to 4x their original resolution. Trained on 250,000+ high-resolution medical scans, BrainSR transforms fast, low-resolution acquisitions into pristine diagnostic-quality images.</p>
+                    <h1 data-i18n="sr.heroTitle">Brain <span class="highlight" data-i18n="sr.heroHighlight">Super Resolution</span></h1>
+                    <p class="hero-subtitle" data-i18n="sr.heroDesc">A deep learning network that upscales, denoises, and enhances brain MRI scans up to 4x their original resolution. Trained on 250,000+ high-resolution medical scans, BrainSR transforms fast, low-resolution acquisitions into pristine diagnostic-quality images.</p>
                     <div class="hero-buttons" style="margin-top:35px;">
-                        <a href="contact.html" class="btn btn-primary">Request a Demo</a>
-                        <a href="#how-it-works" class="btn btn-outline">See How It Works</a>
+                        <a href="contact.html" class="btn btn-primary" data-i18n="sr.btnDemo">Request a Demo</a>
+                        <a href="#how-it-works" class="btn btn-outline" data-i18n="sr.btnHow">See How It Works</a>
                     </div>
                 </div>
                 <div class="hero-right">
@@ -282,19 +295,19 @@
                 <div class="metrics-bar reveal">
                     <div class="m-item">
                         <h3>4x</h3>
-                        <p>Resolution Upscale</p>
+                        <p data-i18n="sr.metric1Label">Resolution Upscale</p>
                     </div>
                     <div class="m-item">
                         <h3>250K+</h3>
-                        <p>Training Scans</p>
+                        <p data-i18n="sr.metric2Label">Training Scans</p>
                     </div>
                     <div class="m-item">
                         <h3>&gt;85%</h3>
-                        <p>SSIM Accuracy</p>
+                        <p data-i18n="sr.metric3Label">SSIM Accuracy</p>
                     </div>
                     <div class="m-item">
                         <h3>&gt;30dB</h3>
-                        <p>PSNR Quality</p>
+                        <p data-i18n="sr.metric4Label">PSNR Quality</p>
                     </div>
                 </div>
             </div>
@@ -304,8 +317,8 @@
         <section class="section-dark">
             <div class="container">
                 <div class="center">
-                    <h2 class="section-title">Why Brain <span class="highlight">Super Resolution</span>?</h2>
-                    <p class="section-lead">Standard MRI scans often trade resolution for speed. BrainSR eliminates that compromise &mdash; transforming rapid, low-resolution acquisitions into images with outstanding anatomical detail.</p>
+                    <h2 class="section-title" data-i18n="sr.benefitsTitle">Why Brain <span class="highlight" data-i18n="sr.benefitsHighlight">Super Resolution</span>?</h2>
+                    <p class="section-lead" data-i18n="sr.benefitsDesc">Standard MRI scans often trade resolution for speed. BrainSR eliminates that compromise &mdash; transforming rapid, low-resolution acquisitions into images with outstanding anatomical detail.</p>
                 </div>
 
                 <div class="benefits-row reveal">
@@ -313,43 +326,43 @@
                         <div class="b-icon-circle">
                             <svg viewBox="0 0 24 24" fill="none" stroke="var(--secondary-color)" stroke-width="2" stroke-linecap="round" width="28" height="28"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                         </div>
-                        <h3>4x Resolution Enhancement</h3>
-                        <p>Upscale from 160x160 to 640x640 pixels (configurable up to 1024x1024), revealing fine anatomical structures invisible in the original scan.</p>
+                        <h3 data-i18n="sr.ben1Title">4x Resolution Enhancement</h3>
+                        <p data-i18n="sr.ben1Desc">Upscale from 160x160 to 640x640 pixels (configurable up to 1024x1024), revealing fine anatomical structures invisible in the original scan.</p>
                     </div>
                     <div class="b-card">
                         <div class="b-icon-circle">
                             <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" width="28" height="28"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                         </div>
-                        <h3>Faster Scan Protocols</h3>
-                        <p>Operators can perform rapid, low-resolution scans and rely on BrainSR to reconstruct high-quality output &mdash; increasing patient throughput and reducing wait times.</p>
+                        <h3 data-i18n="sr.ben2Title">Faster Scan Protocols</h3>
+                        <p data-i18n="sr.ben2Desc">Operators can perform rapid, low-resolution scans and rely on BrainSR to reconstruct high-quality output &mdash; increasing patient throughput and reducing wait times.</p>
                     </div>
                     <div class="b-card">
                         <div class="b-icon-circle">
                             <svg viewBox="0 0 24 24" fill="none" stroke="var(--secondary-color)" stroke-width="2" stroke-linecap="round" width="28" height="28"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
                         </div>
-                        <h3>Intelligent Denoising</h3>
-                        <p>Simultaneously removes acquisition noise and artefacts while preserving critical diagnostic features, delivering cleaner images than the source hardware alone.</p>
+                        <h3 data-i18n="sr.ben3Title">Intelligent Denoising</h3>
+                        <p data-i18n="sr.ben3Desc">Simultaneously removes acquisition noise and artefacts while preserving critical diagnostic features, delivering cleaner images than the source hardware alone.</p>
                     </div>
                     <div class="b-card">
                         <div class="b-icon-circle">
                             <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" width="28" height="28"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                         </div>
-                        <h3>Diagnostic Confidence</h3>
-                        <p>Validated on tumour datasets including Schwannoma and GBM, achieving &gt;85% SSIM and &gt;30 dB PSNR against ground truth high-resolution scans.</p>
+                        <h3 data-i18n="sr.ben4Title">Diagnostic Confidence</h3>
+                        <p data-i18n="sr.ben4Desc">Validated on tumour datasets including Schwannoma and GBM, achieving &gt;85% SSIM and &gt;30 dB PSNR against ground truth high-resolution scans.</p>
                     </div>
                     <div class="b-card">
                         <div class="b-icon-circle">
                             <svg viewBox="0 0 24 24" fill="none" stroke="var(--secondary-color)" stroke-width="2" stroke-linecap="round" width="28" height="28"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                         </div>
-                        <h3>Reduced Rescan Rates</h3>
-                        <p>Salvage motion-degraded or noisy acquisitions that would normally require the patient to be re-scanned, saving time and cost for both clinic and patient.</p>
+                        <h3 data-i18n="sr.ben5Title">Reduced Rescan Rates</h3>
+                        <p data-i18n="sr.ben5Desc">Salvage motion-degraded or noisy acquisitions that would normally require the patient to be re-scanned, saving time and cost for both clinic and patient.</p>
                     </div>
                     <div class="b-card">
                         <div class="b-icon-circle">
                             <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" width="28" height="28"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                         </div>
-                        <h3>Seamless Integration</h3>
-                        <p>Accepts standard grayscale MRI input and delivers enhanced output compatible with existing PACS workflows. No hardware upgrades required.</p>
+                        <h3 data-i18n="sr.ben6Title">Seamless Integration</h3>
+                        <p data-i18n="sr.ben6Desc">Accepts standard grayscale MRI input and delivers enhanced output compatible with existing PACS workflows. No hardware upgrades required.</p>
                     </div>
                 </div>
             </div>
@@ -359,8 +372,8 @@
         <section id="how-it-works" class="section-darker">
             <div class="container">
                 <div class="center">
-                    <h2 class="section-title">How It <span class="highlight">Works</span></h2>
-                    <p class="section-lead">BrainSR uses a Conditional Generative Adversarial Network with deep residual blocks and curriculum learning to progressively reconstruct high-resolution detail from low-resolution input.</p>
+                    <h2 class="section-title" data-i18n="sr.howTitle">How It <span class="highlight" data-i18n="sr.howHighlight">Works</span></h2>
+                    <p class="section-lead" data-i18n="sr.howDesc">BrainSR uses a Conditional Generative Adversarial Network with deep residual blocks and curriculum learning to progressively reconstruct high-resolution detail from low-resolution input.</p>
                 </div>
 
                 <div class="pipeline-wrap reveal">
@@ -375,8 +388,8 @@
                                     <text x="24" y="27" text-anchor="middle" fill="var(--text-muted)" font-size="7" font-family="Montserrat" font-weight="600">160</text>
                                 </svg>
                             </div>
-                            <h4>Low-Res Input</h4>
-                            <p>A standard 160x160 MRI scan is captured using a fast acquisition protocol.</p>
+                            <h4 data-i18n="sr.step1Title">Low-Res Input</h4>
+                            <p data-i18n="sr.step1Desc">A standard 160x160 MRI scan is captured using a fast acquisition protocol.</p>
                         </div>
 
                         <!-- Step 2 -->
@@ -390,8 +403,8 @@
                                     <circle cx="30" cy="28" r="2" fill="var(--secondary-color)" opacity="0.5"/>
                                 </svg>
                             </div>
-                            <h4>Normalise &amp; Degrade</h4>
-                            <p>Pixel normalisation and synthetic degradation modelling prepare the input for the generator.</p>
+                            <h4 data-i18n="sr.step2Title">Normalise &amp; Degrade</h4>
+                            <p data-i18n="sr.step2Desc">Pixel normalisation and synthetic degradation modelling prepare the input for the generator.</p>
                         </div>
 
                         <!-- Step 3 – GAN core -->
@@ -426,8 +439,8 @@
                                     <path d="M10 12 Q22 6 34 12" stroke="var(--accent-color)" stroke-width="1" fill="none" stroke-dasharray="2 2" opacity="0.6"/>
                                 </svg>
                             </div>
-                            <h4>GAN Super-Resolution</h4>
-                            <p>A generator with 24 residual blocks reconstructs detail, while a discriminator ensures perceptual realism.</p>
+                            <h4 data-i18n="sr.step3Title">GAN Super-Resolution</h4>
+                            <p data-i18n="sr.step3Desc">A generator with 24 residual blocks reconstructs detail, while a discriminator ensures perceptual realism.</p>
                         </div>
 
                         <!-- Step 4 -->
@@ -447,8 +460,8 @@
                                     <rect x="26" y="33" width="4" height="3" rx="0.5" fill="var(--accent-color)" opacity="0.5"/>
                                 </svg>
                             </div>
-                            <h4>Perceptual Refinement</h4>
-                            <p>VGG19 perceptual loss and adversarial sharpening produce crisp, diagnostically faithful textures.</p>
+                            <h4 data-i18n="sr.step4Title">Perceptual Refinement</h4>
+                            <p data-i18n="sr.step4Desc">VGG19 perceptual loss and adversarial sharpening produce crisp, diagnostically faithful textures.</p>
                         </div>
 
                         <!-- Step 5 -->
@@ -460,8 +473,8 @@
                                     <path d="M16 35l4 4 8-8" stroke="#50e890" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
                                 </svg>
                             </div>
-                            <h4>High-Res Output</h4>
-                            <p>A 640x640 (or up to 1024x1024) image with enhanced clarity, ready for radiologist review.</p>
+                            <h4 data-i18n="sr.step5Title">High-Res Output</h4>
+                            <p data-i18n="sr.step5Desc">A 640x640 (or up to 1024x1024) image with enhanced clarity, ready for radiologist review.</p>
                         </div>
                     </div>
                 </div>
@@ -477,22 +490,22 @@
         <section class="section-dark">
             <div class="container">
                 <div class="center">
-                    <h2 class="section-title">Clinical <span class="highlight">Applications</span></h2>
-                    <p class="section-lead">BrainSR empowers radiologists and imaging centres with sharper diagnostics across a range of clinical scenarios.</p>
+                    <h2 class="section-title" data-i18n="sr.useCasesTitle">Clinical <span class="highlight" data-i18n="sr.useCasesHighlight">Applications</span></h2>
+                    <p class="section-lead" data-i18n="sr.useCasesDesc">BrainSR empowers radiologists and imaging centres with sharper diagnostics across a range of clinical scenarios.</p>
                 </div>
 
                 <div class="use-cases-grid reveal">
                     <div class="uc-card">
-                        <h3>Tumour Assessment</h3>
-                        <p>Reveal fine margins and micro-structures in brain tumours including Schwannoma and GBM, enabling more precise treatment planning and surgical guidance.</p>
+                        <h3 data-i18n="sr.uc1Title">Tumour Assessment</h3>
+                        <p data-i18n="sr.uc1Desc">Reveal fine margins and micro-structures in brain tumours including Schwannoma and GBM, enabling more precise treatment planning and surgical guidance.</p>
                     </div>
                     <div class="uc-card">
-                        <h3>High-Throughput Clinics</h3>
-                        <p>Run faster, lower-resolution scan protocols and let BrainSR reconstruct diagnostic-quality images &mdash; reducing scan time and increasing daily patient volume.</p>
+                        <h3 data-i18n="sr.uc2Title">High-Throughput Clinics</h3>
+                        <p data-i18n="sr.uc2Desc">Run faster, lower-resolution scan protocols and let BrainSR reconstruct diagnostic-quality images &mdash; reducing scan time and increasing daily patient volume.</p>
                     </div>
                     <div class="uc-card">
-                        <h3>Legacy Equipment Enhancement</h3>
-                        <p>Breathe new life into older MRI hardware by computationally boosting the resolution of scans beyond the physical limits of the scanner.</p>
+                        <h3 data-i18n="sr.uc3Title">Legacy Equipment Enhancement</h3>
+                        <p data-i18n="sr.uc3Desc">Breathe new life into older MRI hardware by computationally boosting the resolution of scans beyond the physical limits of the scanner.</p>
                     </div>
                 </div>
             </div>
@@ -501,9 +514,9 @@
         <!-- ════════════ CTA ════════════ -->
         <section class="cta-section">
             <div class="container">
-                <h2>Ready for <span class="highlight">4x Clarity</span>?</h2>
-                <p>See BrainSR in action with your own imaging data.</p>
-                <a href="contact.html" class="btn btn-primary">Request a Demo</a>
+                <h2 data-i18n="sr.ctaTitle">Ready for <span class="highlight" data-i18n="sr.ctaHighlight">4x Clarity</span>?</h2>
+                <p data-i18n="sr.ctaDesc">See BrainSR in action with your own imaging data.</p>
+                <a href="contact.html" class="btn btn-primary" data-i18n="sr.ctaBtn">Request a Demo</a>
             </div>
         </section>
     </main>
@@ -516,32 +529,44 @@
                         <img src="Assets/Logo-White.png" alt="Pixelence" class="brand-logo">
                     </a>
                 </div>
-                <p>Pixelence is changing brain medical imaging by eliminating Gadolinium and using 95% accurate predictions, making brain tumour treatment more affordable and safer, and saving 100 minutes of patients' and hospitals' time on every visit.</p>
-                <p class="experience-badge">56 years of combined experience</p>
+                <p data-i18n="footer.description">Pixelence is changing brain medical imaging by eliminating Gadolinium and using 95% accurate predictions, making brain tumour treatment more affordable and safer, and saving 100 minutes of patients' and hospitals' time on every visit.</p>
+                <p class="experience-badge" data-i18n="footer.experience">56 years of combined experience</p>
             </div>
             <div class="footer-links">
-                <h4>Company</h4>
+                <h4 data-i18n="footer.company">Company</h4>
                 <ul>
-                    <li><a href="index.html#home">Home</a></li>
-                    <li><a href="news.html">News</a></li>
-                    <li><a href="index.html#focus">Focus Areas</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="index.html#home" data-i18n="footer.home">Home</a></li>
+                    <li><a href="news.html" data-i18n="footer.news">News</a></li>
+                    <li><a href="index.html#focus" data-i18n="footer.focusAreas">Focus Areas</a></li>
+                    <li><a href="contact.html" data-i18n="footer.contactUs">Contact Us</a></li>
                 </ul>
             </div>
             <div class="footer-links">
-                <h4>Products</h4>
+                <h4 data-i18n="footer.products">Products</h4>
                 <ul>
-                    <li><a href="super-resolution.html">Brain Super Resolution</a></li>
-                    <li><a href="fat-suppression.html">Brain Fat Suppression</a></li>
-                    <li><a href="enhance.html">Brain Enhance</a></li>
+                    <li><a href="super-resolution.html" data-i18n="footer.brainSuperRes">Brain Super Resolution</a></li>
+                    <li><a href="fat-suppression.html" data-i18n="footer.brainFatSup">Brain Fat Suppression</a></li>
+                    <li><a href="enhance.html" data-i18n="footer.brainEnhance">Brain Enhance</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>Copyright &copy; 2026 All Rights Reserved. Pixelence AI.</p>
+            <p data-i18n="footer.copyright">Copyright &copy; 2026 All Rights Reserved. Pixelence AI.</p>
         </div>
     </footer>
 
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent" class="cookie-banner" style="display: none;">
+        <div class="cookie-content">
+            <p data-i18n="cookie.message">We use cookies and similar technologies to enhance your browsing experience. By continuing to use this site, you consent to our use of cookies.</p>
+            <div class="cookie-actions">
+                <button id="cookie-accept" class="btn btn-primary" data-i18n="cookie.accept">Accept</button>
+                <button id="cookie-decline" class="btn btn-outline" data-i18n="cookie.decline">Decline</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="translations.js"></script>
     <script src="script.js"></script>
     <script>
     /* ──────────────────────────────────────────────

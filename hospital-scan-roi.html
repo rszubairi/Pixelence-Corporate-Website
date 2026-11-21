@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Scan ROI | Pixelence</title>
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="description" content="Pixelence hospital scan ROI model with working calculations, for advisor review.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Palette and type follow the Pixelence corporate website (styles.css). */
+        :root {
+            --primary-color: #4B21CC;
+            --primary-light: #5B2BFA;
+            --secondary-color: #9D8DF1;
+            --accent-color: #FF5E85;
+            --bg-dark: #1A1A2E;
+            --bg-darker: #0D0D15;
+            --surface: #22223D;
+            --surface-2: #2A2A4A;
+            --line: rgba(157, 141, 241, 0.22);
+            --text-light: #FFFFFF;
+            --text-muted: #B0B0C4;
+            --good: #4FD1A1;
+            --bad: #FF5E85;
+            --warn: #F2C260;
+            --font-primary: 'Montserrat', sans-serif;
+            --border-radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            color-scheme: dark;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            font-size: 15px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Top bar */
+        .topbar {
+            padding: 18px 0;
+            border-bottom: 1px solid var(--line);
+            background: rgba(13, 13, 21, 0.6);
+        }
+
+        .topbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .brand-logo {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            border: 1px solid var(--line);
+            border-radius: 30px;
+            padding: 5px 14px;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            padding: 64px 0 40px;
+            background: var(--bg-darker);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -15%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(75, 33, 204, 0.18) 0%, rgba(26, 26, 46, 0) 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 94, 133, 0.08) 0%, rgba(26, 26, 46, 0) 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            font-size: 0.78rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: clamp(1.9rem, 4.4vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 18px;
+            text-wrap: balance;
+        }
+
+        h1 .hl {
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .sub {
+            color: var(--text-muted);
+            max-width: 75ch;
+            font-size: 1.05rem;
+        }
+
+        main {
+            padding: 36px 0 64px;
+        }
+
+        /* Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .stack>*+* {
+            margin-top: 20px;
+        }
+
+        @media (max-width: 880px) {
+            .grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--border-radius);
+            padding: 22px;
+        }
+
+        .panel h2 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 48px 0 6px;
+        }
+
+        .section-lead {
+            color: var(--text-muted);
+            max-width: 80ch;
+            margin-bottom: 20px;
+        }
+
+        .grp {
+            font-size: 0.72rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            margin: 20px 0 10px;
+            font-weight: 600;
+        }
+
+        .grp:first-of-type {
+            margin-top: 0;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 118px;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .row label {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .row small {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.72rem;
+            font-weight: 400;
+        }
+
+        .inp {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--bg-darker);
+            padding: 0 10px;
+        }
+
+        .inp span {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .inp input {
+            width: 100%;
+            border: 0;
+            background: transparent;
+            color: var(--text-light);
+            font: inherit;
+            padding: 8px 4px;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+            min-width: 0;
+        }
+
+        .inp:focus-within {
+            outline: 2px solid var(--secondary-color);
+        }
+
+        .inp input:focus {
+            outline: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font: inherit;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--secondary-color);
+        }
+
+        .btn:hover {
+            background: rgba(157, 141, 241, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .btn:focus-visible {
+            outline: 2px solid var(--secondary-color);
+            outline-offset: 2px;
+        }
+
+        .flag {
+            display: inline-block;
+            background: rgba(242, 194, 96, 0.12);
+            color: var(--warn);
+            border-radius: 6px;
+            padding: 1px 8px;
+            font-size: 0.68rem;
+            font-weight: 600;
+            vertical-align: middle;
+            margin-left: 6px;
+        }
+
+        /* KPIs */
+        .kpis {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+        }
+
+        .kpi {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--border-radius);
+            padding: 16px;
+        }
+
+        .kpi .l {
+            font-size: 0.7rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .kpi .v {
+            font-size: 1.75rem;
+            font-weight: 800;
+            font-variant-numeric: tabular-nums;
+            margin: 4px 0 2px;
+        }
+
+        .kpi .n {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .pos {
+            color: var(--good);
+        }
+
+        .neg {
+            color: var(--bad);
+        }
+
+        .verdict {
+            background: linear-gradient(135deg, rgba(75, 33, 204, 0.28), rgba(91, 43, 250, 0.1));
+            border: 1px solid var(--line);
+            border-radius: var(--border-radius);
+            padding: 16px 20px;
+        }
+
+        /* Chart + tables */
+        .chart {
+            overflow-x: auto;
+        }
+
+        svg text {
+            fill: var(--text-light);
+            font-family: var(--font-primary);
+        }
+
+        svg .m {
+            fill: var(--text-muted);
+        }
+
+        .tw {
+            overflow-x: auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-variant-numeric: tabular-nums;
+            font-size: 0.85rem;
+            min-width: 440px;
+        }
+
+        th,
+        td {
+            padding: 9px 10px;
+            text-align: right;
+            border-bottom: 1px solid var(--line);
+        }
+
+        th:first-child,
+        td:first-child {
+            text-align: left;
+        }
+
+        th {
+            font-size: 0.68rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        tr.tot td {
+            font-weight: 700;
+            border-bottom: 0;
+        }
+
+        /* Working calculations */
+        .calc-step {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--border-radius);
+            padding: 20px 22px;
+            margin-bottom: 14px;
+            display: grid;
+            grid-template-columns: 40px minmax(0, 1fr);
+            gap: 16px;
+        }
+
+        .calc-step .num {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .calc-step h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .calc-step .why {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .eq {
+            font-family: 'Cascadia Mono', Consolas, 'Courier New', monospace;
+            font-size: 0.82rem;
+            background: var(--bg-darker);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin-top: 8px;
+            overflow-x: auto;
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+        }
+
+        .eq .k {
+            color: var(--text-muted);
+        }
+
+        .eq b {
+            font-weight: 700;
+        }
+
+        @media (max-width: 520px) {
+            .calc-step {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        .foot {
+            margin-top: 36px;
+            padding: 18px 22px;
+            border: 1px solid var(--line);
+            border-radius: var(--border-radius);
+            background: rgba(13, 13, 21, 0.5);
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            max-width: 100%;
+        }
+
+        .foot h3 {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+
+        footer {
+            background: var(--bg-darker);
+            border-top: 1px solid var(--line);
+            padding: 22px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topbar">
+        <div class="container">
+            <img src="Assets/Logo-White.png" alt="Pixelence" class="brand-logo">
+            <span class="badge">Confidential · For advisor review</span>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="eyebrow">Pixelence · US reimbursement model</div>
+            <h1>What a Pixelence scan does to <span class="hl">hospital margin</span></h1>
+            <p class="sub">A hospital that swaps a contrast brain MRI (CPT 70553) for a Pixelence scan billed as 70551
+                loses the with-contrast payment but saves contrast costs and scanner time. Change any input to see the
+                per-scan and annual effect, then scroll to the working calculations to check each step.</p>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <div class="grid">
+                <div class="panel" id="inputs">
+                    <h2>Inputs <span class="flag">examples, verify</span></h2>
+
+                    <div class="grp">Payment per scan</div>
+                    <div class="row"><label for="revN">Without contrast (70551)<small>Example: APC 5523 national
+                                rate</small></label>
+                        <div class="inp"><span>$</span><input id="revN" type="number" step="0.01" value="243.77"></div>
+                    </div>
+                    <div class="row"><label for="revC">With contrast (70553)<small>Example: APC 5572 national
+                                rate</small></label>
+                        <div class="inp"><span>$</span><input id="revC" type="number" step="0.01" value="356.43"></div>
+                    </div>
+
+                    <div class="grp">Hospital costs per contrast scan</div>
+                    <div class="row"><label for="agent">Gadolinium agent<small>Assumption</small></label>
+                        <div class="inp"><span>$</span><input id="agent" type="number" step="1" value="25"></div>
+                    </div>
+                    <div class="row"><label for="extra">Kidney test, injection, nursing<small>Assumption</small></label>
+                        <div class="inp"><span>$</span><input id="extra" type="number" step="1" value="20"></div>
+                    </div>
+
+                    <div class="grp">Scanner time</div>
+                    <div class="row"><label for="mins">Scanner minutes saved<small>Assumption, per replaced
+                                scan</small></label>
+                        <div class="inp"><input id="mins" type="number" step="1" value="40"><span>min</span></div>
+                    </div>
+                    <div class="row"><label for="pmin">Value of a scanner minute<small>Assumption, only if there is a
+                                backlog</small></label>
+                        <div class="inp"><span>$</span><input id="pmin" type="number" step="0.5" value="5"></div>
+                    </div>
+
+                    <div class="grp">Pixelence and volume</div>
+                    <div class="row"><label for="fee">Pixelence licence per scan</label>
+                        <div class="inp"><span>$</span><input id="fee" type="number" step="1" value="70"></div>
+                    </div>
+                    <div class="row"><label for="sites">Number of sites<small>Hospitals or imaging sites</small></label>
+                        <div class="inp"><input id="sites" type="number" step="1" min="1" value="1"></div>
+                    </div>
+                    <div class="row"><label for="setup">One-time setup per site<small>Paid once, in year
+                                1</small></label>
+                        <div class="inp"><span>$</span><input id="setup" type="number" step="100" value="3000"></div>
+                    </div>
+                    <div class="row"><label for="vol">Pixelence scans per year<small>At each site</small></label>
+                        <div class="inp"><input id="vol" type="number" step="100" value="2000"></div>
+                    </div>
+                    <div class="row"><label for="mix">Share replacing a contrast scan<small>The rest are patients who
+                                could not have contrast</small></label>
+                        <div class="inp"><input id="mix" type="number" step="5" min="0" max="100" value="60"><span>%</span>
+                        </div>
+                    </div>
+
+                    <button id="reset" class="btn" type="button" style="margin-top:10px">Reset to examples</button>
+                </div>
+
+                <div class="stack">
+                    <div class="kpis" id="kpis"></div>
+                    <div class="verdict" id="verdict"></div>
+
+                    <div class="panel">
+                        <h2>Per replaced scan: change in hospital margin</h2>
+                        <div class="chart"><svg id="wf" viewBox="0 0 680 300" width="100%" role="img"
+                                aria-label="Waterfall of per-scan margin change"></svg></div>
+                    </div>
+
+                    <div class="panel">
+                        <h2>Per-scan and annual view, all sites</h2>
+                        <div class="tw">
+                            <table id="tbl"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Working calculations</h2>
+            <p class="section-lead">Every figure above comes from the steps below. The numbers update live with the
+                inputs, so changing an assumption shows exactly where it flows through.</p>
+            <div id="calcs"></div>
+
+            <div class="foot">
+                <h3>Caveats</h3>
+                All rates and costs are examples, not verified figures. The payment rates are 2026 national hospital
+                outpatient (OPPS) rates quoted for a neck MRA, not a brain MRI. Check the brain MRI payment groups for
+                70551 and 70553 in the CMS addenda before using these numbers. Freestanding centres and private payers
+                are paid differently, and some pay the contrast agent separately. Scanner time only counts as value when
+                the scanner is the bottleneck. Patients who could not have contrast would receive a 70551 scan anyway,
+                so Pixelence adds clinical value there but no extra payment.
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">Copyright &copy; 2026 All Rights Reserved. Pixelence AI. Confidential draft, not for
+            distribution.</div>
+    </footer>
+
+    <script>
+        var D = { revN: 243.77, revC: 356.43, agent: 25, extra: 20, mins: 40, pmin: 5, fee: 70, sites: 1, setup: 3000, vol: 2000, mix: 60 };
+        var ids = Object.keys(D);
+        function g(id) { var v = parseFloat(document.getElementById(id).value); return isNaN(v) ? 0 : v }
+        function money(x, d) { d = d == null ? 0 : d; var s = Math.abs(x).toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d }); return (x < 0 ? '-$' : '$') + s }
+        function sgn(x, d) { return (x > 0 ? '+' : '') + money(x, d) }
+        function cls(x) { return x >= 0 ? 'pos' : 'neg' }
+        function num(x) { return Math.round(x).toLocaleString('en-US') }
+        function calc() {
+            var v = {}; ids.forEach(function (i) { v[i] = g(i) });
+            var pay = v.revN - v.revC, tv = v.mins * v.pmin;
+            var steps = [['Payment change', pay], ['Agent saved', v.agent], ['Related costs saved', v.extra], ['Scanner time', tv], ['Pixelence licence', -v.fee]];
+            var delta = steps.reduce(function (a, s) { return a + s[1] }, 0);
+            var mix = Math.min(Math.max(v.mix, 0), 100) / 100;
+            var S = Math.max(Math.round(v.sites), 1), tot = v.vol * S;
+            var nRep = tot * mix, nCon = tot - nRep;
+            var annRep = nRep * delta, annCon = -nCon * v.fee, annual = annRep + annCon;
+            var setup = S * v.setup;
+            var be = pay + v.agent + v.extra + tv; // licence price at which a replaced scan breaks even
+            return { v: v, S: S, mix: mix, tot: tot, setup: setup, steps: steps, delta: delta, nRep: nRep, nCon: nCon, annRep: annRep, annCon: annCon, annual: annual, y1: annual - setup, be: be, pay: pay, tv: tv, rev: tot * v.fee, rev1: tot * v.fee + setup };
+        }
+        function render() {
+            var c = calc(), v = c.v;
+            document.getElementById('kpis').innerHTML =
+                k('Per replaced scan', sgn(c.delta, 0), cls(c.delta), 'Change in hospital margin') +
+                k('Break-even licence', c.be > 0 ? money(c.be, 0) : 'None', c.be >= v.fee ? 'pos' : 'neg', c.be > 0 ? 'Highest price that leaves the hospital whole' : 'Hospital loses even at a $0 licence') +
+                k('Hospitals, year 1', sgn(c.y1, 0), cls(c.y1), c.S + ' site' + (c.S > 1 ? 's' : '') + ', including ' + money(c.setup, 0) + ' setup') +
+                k('Hospitals, year 2 on', sgn(c.annual, 0), cls(c.annual), 'Per year, no setup cost') +
+                k('Pixelence, year 1', money(c.rev1, 0), '', money(c.rev, 0) + ' licence + ' + money(c.setup, 0) + ' setup') +
+                k('Pixelence, year 2 on', money(c.rev, 0), '', 'Licence only, ' + Math.round(c.tot).toLocaleString() + ' scans');
+            var gap = c.delta;
+            var t;
+            if (gap >= 0) { t = '<b>The hospital comes out ahead by ' + money(gap, 0) + ' per replaced scan.</b> Contrast and time savings cover the lost payment and the licence.'; }
+            else if (c.be > 0) { t = '<b>The hospital loses ' + money(-gap, 0) + ' per replaced scan at a ' + money(v.fee, 0) + ' licence.</b> It breaks even only if the licence drops to ' + money(c.be, 0) + ', or if scanner time is worth more than the example.'; }
+            else { t = '<b>The hospital loses ' + money(-gap, 0) + ' per replaced scan, and still loses at a $0 licence.</b> The with-contrast payment lost is larger than the contrast cost and time saved, so the pitch to hospitals has to rest on patients who cannot have contrast, capacity and safety, not on margin.'; }
+            document.getElementById('verdict').innerHTML = t;
+            wf(c);
+            document.getElementById('tbl').innerHTML =
+                '<tr><th>Line</th><th>Per scan</th><th>Scans per year</th><th>Per year</th></tr>' +
+                '<tr><td>Replaced contrast scans</td><td class="' + cls(c.delta) + '">' + sgn(c.delta, 2) + '</td><td>' + Math.round(c.nRep).toLocaleString() + '</td><td class="' + cls(c.annRep) + '">' + sgn(c.annRep, 0) + '</td></tr>' +
+                '<tr><td>Patients who could not have contrast</td><td class="neg">' + money(-v.fee, 2) + '</td><td>' + Math.round(c.nCon).toLocaleString() + '</td><td class="' + cls(c.annCon) + '">' + sgn(c.annCon, 0) + '</td></tr>' +
+                '<tr><td>One-time setup (' + c.S + ' site' + (c.S > 1 ? 's' : '') + ', year 1 only)</td><td class="neg">' + money(-v.setup, 0) + ' per site</td><td></td><td class="neg">' + sgn(-c.setup, 0) + '</td></tr>' +
+                '<tr class="tot"><td>Hospitals net, year 1</td><td></td><td>' + Math.round(c.tot).toLocaleString() + '</td><td class="' + cls(c.y1) + '">' + sgn(c.y1, 0) + '</td></tr>' +
+                '<tr class="tot"><td>Hospitals net, year 2 on</td><td></td><td>' + Math.round(c.tot).toLocaleString() + '</td><td class="' + cls(c.annual) + '">' + sgn(c.annual, 0) + '</td></tr>';
+            working(c);
+        }
+        function k(l, val, cl, n) { return '<div class="kpi"><div class="l">' + l + '</div><div class="v ' + cl + '">' + val + '</div><div class="n">' + n + '</div></div>' }
+
+        // Step-by-step working, with the live inputs substituted into each formula.
+        function step(n, title, why, eqs) {
+            return '<div class="calc-step"><div class="num">' + n + '</div><div><h3>' + title + '</h3><div class="why">' + why + '</div>' +
+                eqs.map(function (e) { return '<div class="eq">' + e + '</div>' }).join('') + '</div></div>';
+        }
+        function working(c) {
+            var v = c.v, p = c.pay;
+            var s = '';
+            s += step(1, 'Payment change per replaced scan',
+                'The hospital is paid the without-contrast rate instead of the with-contrast rate. This is a loss, so it is negative.',
+                ['<span class="k">payment change = rate 70551 &minus; rate 70553</span>',
+                '= ' + money(v.revN, 2) + ' &minus; ' + money(v.revC, 2) + ' = <b class="' + cls(p) + '">' + sgn(p, 2) + '</b>']);
+            s += step(2, 'Costs the hospital no longer pays',
+                'No gadolinium agent and no kidney test, injection or nursing time on a replaced scan.',
+                ['<span class="k">costs saved = agent + related costs</span>',
+                '= ' + money(v.agent, 2) + ' + ' + money(v.extra, 2) + ' = <b class="pos">' + sgn(v.agent + v.extra, 2) + '</b>']);
+            s += step(3, 'Value of scanner time',
+                'Only counts as value when the scanner is the bottleneck. Set the value per minute to $0 to exclude it.',
+                ['<span class="k">time value = minutes saved &times; value per minute</span>',
+                '= ' + num(v.mins) + ' min &times; ' + money(v.pmin, 2) + ' = <b class="' + cls(c.tv) + '">' + sgn(c.tv, 2) + '</b>']);
+            s += step(4, 'Net margin change per replaced scan',
+                'Sum of steps 1 to 3, less the Pixelence licence fee. This is the waterfall chart above.',
+                ['<span class="k">net = payment change + costs saved + time value &minus; licence</span>',
+                '= ' + money(p, 2) + ' + ' + money(v.agent + v.extra, 2) + ' + ' + money(c.tv, 2) + ' &minus; ' + money(v.fee, 2),
+                '= <b class="' + cls(c.delta) + '">' + sgn(c.delta, 2) + '</b> per replaced scan']);
+            s += step(5, 'Break-even licence',
+                'The licence price at which the hospital is exactly neutral on a replaced scan (net = $0). Below zero means no licence price works on margin alone.',
+                ['<span class="k">break-even = payment change + costs saved + time value</span>',
+                '= ' + money(p, 2) + ' + ' + money(v.agent + v.extra, 2) + ' + ' + money(c.tv, 2) + ' = <b class="' + cls(c.be) + '">' + sgn(c.be, 2) + '</b>',
+                '<span class="k">compare with the licence of</span> ' + money(v.fee, 2) + ' <span class="k">&rarr; hospital is</span> <b class="' + cls(c.be - v.fee) + '">' + (c.be >= v.fee ? 'at or above break-even' : 'below break-even') + '</b>']);
+            s += step(6, 'Annual scan volumes',
+                'Scans are split between those that replace a contrast scan and those on patients who could not have contrast.',
+                ['<span class="k">total scans = scans per site &times; sites</span> = ' + num(v.vol) + ' &times; ' + c.S + ' = <b>' + num(c.tot) + '</b>',
+                '<span class="k">replacing contrast = total &times; share</span> = ' + num(c.tot) + ' &times; ' + Math.round(c.mix * 100) + '% = <b>' + num(c.nRep) + '</b>',
+                '<span class="k">no contrast possible = total &minus; replacing</span> = ' + num(c.tot) + ' &minus; ' + num(c.nRep) + ' = <b>' + num(c.nCon) + '</b>']);
+            s += step(7, 'Annual effect on hospitals',
+                'Replaced scans earn the net change from step 4. Scans on patients who could not have contrast would be billed as 70551 anyway, so the hospital pays the licence and gets no offsetting saving.',
+                ['<span class="k">replaced = scans &times; net per scan</span> = ' + num(c.nRep) + ' &times; ' + money(c.delta, 2) + ' = <b class="' + cls(c.annRep) + '">' + sgn(c.annRep, 0) + '</b>',
+                '<span class="k">no contrast = &minus;scans &times; licence</span> = &minus;' + num(c.nCon) + ' &times; ' + money(v.fee, 2) + ' = <b class="' + cls(c.annCon) + '">' + sgn(c.annCon, 0) + '</b>',
+                '<span class="k">year 2 on = replaced + no contrast</span> = ' + money(c.annRep, 0) + ' + (' + money(c.annCon, 0) + ') = <b class="' + cls(c.annual) + '">' + sgn(c.annual, 0) + '</b> per year']);
+            s += step(8, 'Year 1 including setup',
+                'One-time setup is paid once per site in the first year only.',
+                ['<span class="k">setup = per-site setup &times; sites</span> = ' + money(v.setup, 0) + ' &times; ' + c.S + ' = <b>' + money(c.setup, 0) + '</b>',
+                '<span class="k">year 1 = annual effect &minus; setup</span> = ' + money(c.annual, 0) + ' &minus; ' + money(c.setup, 0) + ' = <b class="' + cls(c.y1) + '">' + sgn(c.y1, 0) + '</b>']);
+            s += step(9, 'Pixelence revenue',
+                'Licence is charged on every Pixelence scan, whether or not it replaced a contrast scan.',
+                ['<span class="k">licence revenue = total scans &times; licence</span> = ' + num(c.tot) + ' &times; ' + money(v.fee, 2) + ' = <b>' + money(c.rev, 0) + '</b> per year',
+                '<span class="k">year 1 = licence revenue + setup</span> = ' + money(c.rev, 0) + ' + ' + money(c.setup, 0) + ' = <b>' + money(c.rev1, 0) + '</b>']);
+            document.getElementById('calcs').innerHTML = s;
+        }
+
+        function wf(c) {
+            var W = 680, H = 300, L = 56, R = 14, T = 24, B = 64, pw = W - L - R, ph = H - T - B;
+            var items = c.steps.map(function (s) { return { n: s[0], d: s[1] } }); items.push({ n: 'Net change', d: c.delta, total: true });
+            var run = 0, lo = 0, hi = 0;
+            items.forEach(function (it) { if (it.total) { it.a = 0; it.b = it.d } else { it.a = run; run += it.d; it.b = run } lo = Math.min(lo, it.a, it.b); hi = Math.max(hi, it.a, it.b) });
+            var span = (hi - lo) || 1; lo -= span * .08; hi += span * .08;
+            var y = function (x) { return T + ph * (hi - x) / (hi - lo) };
+            var n = items.length, bw = pw / n, s = '';
+            var tick = niceStep((hi - lo) / 4);
+            for (var t = Math.ceil(lo / tick) * tick; t <= hi; t += tick) { s += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(t) + '" y2="' + y(t) + '" stroke="rgba(157,141,241,0.22)" stroke-width="1"/><text class="m" x="' + (L - 8) + '" y="' + (y(t) + 4) + '" font-size="11" text-anchor="end">' + money(t, 0) + '</text>' }
+            s += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(0) + '" y2="' + y(0) + '" stroke="#B0B0C4" stroke-width="1.2"/>';
+            items.forEach(function (it, i) {
+                var x = L + i * bw + bw * .18, w = bw * .64, top = Math.min(y(it.a), y(it.b)), h = Math.max(Math.abs(y(it.a) - y(it.b)), 1.5);
+                var col = it.total ? 'var(--primary-light)' : (it.d >= 0 ? 'var(--good)' : 'var(--bad)');
+                s += '<rect x="' + x + '" y="' + top + '" width="' + w + '" height="' + h + '" rx="3" fill="' + col + '"/>';
+                var ly = it.d >= 0 ? top - 6 : top + h + 14;
+                s += '<text x="' + (x + w / 2) + '" y="' + ly + '" font-size="12" font-weight="600" text-anchor="middle">' + sgn(it.d, 0) + '</text>';
+                var words = it.n.split(' '), l1 = words.slice(0, Math.ceil(words.length / 2)).join(' '), l2 = words.slice(Math.ceil(words.length / 2)).join(' ');
+                s += '<text class="m" x="' + (x + w / 2) + '" y="' + (H - B + 22) + '" font-size="11" text-anchor="middle">' + l1 + '</text>';
+                if (l2) s += '<text class="m" x="' + (x + w / 2) + '" y="' + (H - B + 36) + '" font-size="11" text-anchor="middle">' + l2 + '</text>';
+            });
+            document.getElementById('wf').innerHTML = s;
+        }
+        function niceStep(r) { var p = Math.pow(10, Math.floor(Math.log10(r || 1))), f = r / p; return (f < 1.5 ? 1 : f < 3.5 ? 2 : f < 7.5 ? 5 : 10) * p }
+        ids.forEach(function (i) { document.getElementById(i).addEventListener('input', render) });
+        document.getElementById('reset').addEventListener('click', function () { ids.forEach(function (i) { document.getElementById(i).value = D[i] }); render() });
+        render();
+    </script>
+</body>
+
+</html>
